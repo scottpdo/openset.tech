@@ -1,0 +1,18 @@
+{
+  "name": "openset.tech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/o-p-e-n-s-e-t/openset.tech.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^11.3.1"
+  }
+}
