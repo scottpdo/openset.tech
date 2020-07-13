@@ -2,72 +2,25 @@
   <head>
     <title>Open Set | Software Design + Research</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      * {
-        -box-sizing: border-box;
-        position: relative;
-      }
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
-          "Lucida Sans Typewriter", "DejaVu Sans Mono",
-          "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco,
-          "Courier New", Courier, monospace;
-        overflow: hidden;
-      }
-      @keyframes blur {
-        from {
-          filter: blur(2px);
-        }
-        to {
-          filter: blur(12px);
-        }
-      }
-      body::before {
-        content: "";
-        display: block;
-        background-image: url(/openset.png);
-        height: 100vh;
-        width: 100vw;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0.9;
-        background-size: contain;
-        background-position: center center;
-        background-repeat: no-repeat;
-        transform: scale(1.5);
-        animation: 2s ease-in-out 0s infinite alternate blur;
-      }
-      .content {
-        height: 100vh;
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .content h1,
-      .content p {
-        background: #000;
-        display: inline-block;
-        padding: 0.4em 0.8em;
-        color: #fff;
-        font-weight: bold;
-        margin: 10px auto;
-      }
-    </style>
+    <link href="/style.css" rel="stylesheet" />
   </head>
   <body>
     <div class="content">
-      <h1>Open Set</h1>
-      <p>Software Design + Research</p>
-      <p>coming summer 2020</p>
+      <header>
+        <h1 id="site-title" class="mono"><span class="logo"></span>Open Set</h1>
+        <p class="mono">Software Design + Research</p>
+        <p class="mono mono--blue-hover">
+          <a href="mailto:hello@openset.tech">hello@openset.tech</a>
+        </p>
+      </header>
+      <main>
+        <h2>Open Set designs software.</h2>
+        <div class="showcase">
+          <div class="card">San José Resident Assistant</div>
+          <div class="card">Flocc.js</div>
+          <div class="card"></div>
+        </div>
+      </main>
     </div>
   </body>
 </html>

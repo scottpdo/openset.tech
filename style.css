@@ -1,0 +1,114 @@
+* {
+  -box-sizing: border-box;
+  position: relative;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
+    "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+    "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier,
+    monospace;
+  overflow: hidden;
+}
+
+.content {
+  padding: 20px;
+}
+
+.mono {
+  background: #000;
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  color: #fff;
+  font-weight: bold;
+  margin: 0 15px 20px 0;
+  vertical-align: middle;
+}
+
+.mono--blue-hover {
+  overflow: hidden;
+}
+
+.mono--blue-hover:before {
+  background: blue;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+
+.mono--blue-hover:hover:before {
+  transform: translateY(0);
+}
+
+.mono a {
+  color: #fff;
+}
+
+#site-title {
+  margin-left: 80px;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.logo {
+  background: blue;
+  border-radius: 50%;
+  display: block;
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  left: -80px;
+  top: 0;
+}
+
+@keyframes pulse {
+  0%,
+  33%,
+  67%,
+  100% {
+    transform: scale(0);
+  }
+  25%,
+  75% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+}
+
+.logo:before {
+  animation: 8s ease-in-out 0s infinite pulse;
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: scale(1.2);
+  border: 1px solid blue;
+}
+
+.showcase {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  border: 1px solid #999;
+  flex-basis: 240px;
+  padding: 15px;
+}
