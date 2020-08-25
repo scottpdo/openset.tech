@@ -22,6 +22,16 @@ export default createGlobalStyle`
         display: block;
     }
 
+    img {
+        height: auto;
+        max-width: 100%;
+    }
+
+    h3 {
+        font-weight: 300;
+        font-size: 36px;
+    }
+
     @font-face {
         font-family: 'TexGyre';
         src: url('/static/fonts/texgyrebonum-bold-webfont.eot');
@@ -72,12 +82,12 @@ export default createGlobalStyle`
     }
     
     :root {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     @media screen and (max-width: 1200px) {
         :root {
-            font-size: 16px;
+            font-size: 18px;
         }
     }
 `;

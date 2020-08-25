@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { XL, L, M, S } from "../styles/breakpoints";
 import { SMALL } from "../styles/spacing";
 
-const sub = (gutter: number, cols: number) =>
+const sub = (gutter, cols) =>
   (cols * 11 * gutter - 12 * (cols - 1) * gutter) / 12;
 
-const StyledColumn = styled.div<ColumnProps>`
+const StyledColumn = styled.div`
   margin-bottom: ${props => (props.marginBottom ? SMALL : 0)}px;
   margin-right: ${props => (props.XSlast ? 0 : SMALL)}px;
   width: calc(
@@ -50,20 +50,6 @@ const StyledColumn = styled.div<ColumnProps>`
   }
 `;
 
-type ColumnProps = {
-  children?: any;
-  width: number;
-  largeWidth?: number;
-  medWidth?: number;
-  smallWidth?: number;
-  xSmallWidth?: number;
-  marginBottom?: boolean;
-  hidePrint?: boolean;
-  XSlast?: boolean;
-  Slast?: boolean;
-  Mlast?: boolean;
-};
-
 /**
  * Columns should always, always be direct children of Grids.
  * They can contain whatever children you might want. The `width` prop is required,
@@ -81,7 +67,7 @@ type ColumnProps = {
  * - smallWidth
  * - xSmallWidth
  */
-const Column = (props: ColumnProps) => {
+const Column = props => {
   const {
     width,
     largeWidth = width,

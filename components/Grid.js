@@ -10,11 +10,6 @@ const StyledGrid = styled.div`
   padding-left: ${props => (props.nested ? 0 : 3 * XLARGE)}px;
   padding-right: ${props => (props.nested ? 0 : 3 * XLARGE)}px;
   width: 100%;
-  @media print {
-    display: ${props => (props.hidePrint ? "none !important" : "flex")};
-    padding-left: ${props => (props.nested ? 0 : SMALL)}px;
-    padding-right: ${props => (props.nested ? 0 : SMALL)}px;
-  }
 `;
 
 const use = (obj, key, fallback) => {
@@ -27,14 +22,7 @@ const use = (obj, key, fallback) => {
  * up (nearly) the entire screen. If the `nested` boolean prop is set, then
  * there won't be any left or right padding (for nested Grids).
  */
-const Grid = ({
-  children,
-  nested = false,
-  ...props
-}: {
-  children?: any;
-  nested?: boolean;
-}) => {
+const Grid = ({ children, nested = false, ...props }) => {
   let XLcols = 0;
   let Lcols = 0;
   let Mcols = 0;
@@ -42,7 +30,7 @@ const Grid = ({
   let XScols = 0;
 
   return (
-    <StyledGrid {...props}>
+    <StyledGrid nested={nested}>
       {Children.toArray(children).map(child => {
         const useProps = (key, fallback) => use(child.props, key, fallback);
 
