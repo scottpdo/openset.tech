@@ -34,7 +34,7 @@ const HeaderLogo = styled.img`
 `;
 
 const HeroLede = styled(Lede)`
-  margin: 140px auto;
+  margin: 180px auto;
   text-align: center;
 `;
 

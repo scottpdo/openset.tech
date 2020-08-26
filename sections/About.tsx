@@ -5,7 +5,27 @@ import Section from "../components/Section";
 import Lede from "../components/Lede";
 
 const List = styled.ul`
-  columns: 2;
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    align-items: center;
+    display: flex;
+    font-size: 18px;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+
+    &:before {
+      content: "◑";
+      margin-right: 8px;
+      color: #00f;
+    }
+    &:nth-child(2n) {
+      &:before {
+        content: "◐";
+      }
+    }
+  }
 `;
 
 const P1 = styled.div`
@@ -45,37 +65,52 @@ const About = () => (
         </Column>
       </Grid>
       <Grid>
-        <Column width={2} />
-      </Grid>
-    </Section>
-    <Section>
-      <Grid>
         <Column width={4} />
-        <Column width={6}>
+        <Column width={6} largeWidth={8}>
           <h4>Specialties</h4>
-          <List>
-            <li>Full-Stack Web Development</li>
-            <li>Interactive Data Visualization</li>
-            <li>Agent-Based Modeling and Simulation</li>
-            <li>SMS (Text Message) Driven Products</li>
-            <li>Natural Language Processing</li>
-          </List>
+          <Grid nested>
+            <Column width={6}>
+              <List>
+                <li>Full-Stack Web Development</li>
+                <li>Interactive Data Visualization</li>
+                <li>Agent-Based Modeling and Simulation</li>
+              </List>
+            </Column>
+            <Column width={6}>
+              <List>
+                <li>SMS (Text Message) Driven Products</li>
+                <li>Natural Language Processing</li>
+              </List>
+            </Column>
+          </Grid>
           <h4>Platforms</h4>
           <List>
-            <li>Web and Responsive/Mobile Web</li>
-            <li>Single-Page Apps</li>
-            <li>Serverless</li>
-            <li>Desktop: OSX, Windows, Linux</li>
-            <li>SMS</li>
+            <Grid nested>
+              <Column width={6}>
+                <li>Web and Responsive/Mobile Web</li>
+                <li>Single-Page Apps</li>
+                <li>Serverless</li>
+              </Column>
+              <Column width={6}>
+                <li>Desktop: OSX, Windows, Linux</li>
+                <li>SMS</li>
+              </Column>
+            </Grid>
           </List>
-          <h4>Specialties</h4>
+          <h4>Technologies</h4>
           <List>
-            <li>Next.js</li>
-            <li>Gatsby</li>
-            <li>Three.js</li>
-            <li>React</li>
-            <li>Django</li>
-            <li>WordPress</li>
+            <Grid nested>
+              <Column width={6}>
+                <li>Next.js</li>
+                <li>Gatsby</li>
+                <li>Three.js</li>
+              </Column>
+              <Column width={6}>
+                <li>React</li>
+                <li>Django</li>
+                <li>WordPress</li>
+              </Column>
+            </Grid>
           </List>
         </Column>
         <Column width={2} />

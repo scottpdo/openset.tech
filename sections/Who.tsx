@@ -9,6 +9,7 @@ const SectionTitle = styled.h3`
 
 const Bio = styled.p`
   font-size: 20px;
+  margin-top: 0;
 `;
 
 const Who = () => (

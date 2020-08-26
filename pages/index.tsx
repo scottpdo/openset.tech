@@ -8,6 +8,7 @@ import Who from "../sections/Who";
 import Contact from "../sections/Contact";
 import Hero from "../sections/Hero";
 import { useEffect } from "react";
+import GLCA from "../components/GLCA";
 
 const Index = () => {
   const onMouseMove = (e: MouseEvent) => {
@@ -26,17 +27,17 @@ const Index = () => {
   return (
     <>
       <Wrapper>
-        <CA direction="down" height={5} />
+        <GLCA direction="down" height={7} />
         <Hero />
-        <CA direction="left" />
+        <GLCA direction="left" />
         <About />
-        <CA direction="right" />
+        <GLCA direction="right" />
         <Work />
-        <CA direction="left" />
+        <GLCA direction="left" />
         <Who />
-        <CA direction="right" />
+        <GLCA direction="right" />
         <Contact />
-        <CA direction="up" height={6} />
+        <GLCA direction="up" height={7} />
       </Wrapper>
     </>
   );

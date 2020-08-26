@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { isEmpty } from "lodash";
 
 import { SMALL, XLARGE } from "../styles/spacing";
+import * as Breakpoints from "../styles/breakpoints";
 
 const StyledGrid = styled.div`
   display: flex;
@@ -10,6 +11,16 @@ const StyledGrid = styled.div`
   padding-left: ${props => (props.nested ? 0 : 3 * XLARGE)}px;
   padding-right: ${props => (props.nested ? 0 : 3 * XLARGE)}px;
   width: 100%;
+
+  @media screen and (max-width: ${Breakpoints.XL}px) {
+    padding-left: ${props => (props.nested ? 0 : 1.5 * XLARGE)}px;
+    padding-right: ${props => (props.nested ? 0 : 1.5 * XLARGE)}px;
+  }
+
+  @media screen and (max-width: ${Breakpoints.L}px) {
+    padding-left: ${props => (props.nested ? 0 : XLARGE)}px;
+    padding-right: ${props => (props.nested ? 0 : XLARGE)}px;
+  }
 `;
 
 const use = (obj, key, fallback) => {
