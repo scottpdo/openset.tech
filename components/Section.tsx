@@ -1,8 +1,14 @@
 import styled from "styled-components";
+import * as Breakpoints from "../styles/breakpoints";
 
 const StyledSection = styled.section`
   padding-top: 100px;
   padding-bottom: 100px;
+
+  @media screen and (max-width: ${Breakpoints.L}px) {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
 
   & > *:first-child,
   & > *:first-child > *:first-child,

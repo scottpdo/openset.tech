@@ -2,7 +2,7 @@ import React, { Children, cloneElement } from "react";
 import styled from "styled-components";
 import { isEmpty } from "lodash";
 
-import { SMALL, XLARGE } from "../styles/spacing";
+import { NORMAL, XLARGE, MEDIUM } from "../styles/spacing";
 import * as Breakpoints from "../styles/breakpoints";
 
 const StyledGrid = styled.div`
@@ -20,6 +20,16 @@ const StyledGrid = styled.div`
   @media screen and (max-width: ${Breakpoints.L}px) {
     padding-left: ${props => (props.nested ? 0 : XLARGE)}px;
     padding-right: ${props => (props.nested ? 0 : XLARGE)}px;
+  }
+
+  @media screen and (max-width: ${Breakpoints.M}px) {
+    padding-left: ${props => (props.nested ? 0 : MEDIUM)}px;
+    padding-right: ${props => (props.nested ? 0 : MEDIUM)}px;
+  }
+
+  @media screen and (max-width: ${Breakpoints.S}px) {
+    padding-left: ${props => (props.nested ? 0 : NORMAL)}px;
+    padding-right: ${props => (props.nested ? 0 : NORMAL)}px;
   }
 `;
 

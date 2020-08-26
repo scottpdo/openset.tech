@@ -12,6 +12,7 @@ import Section from "../components/Section";
 import Lede from "../components/Lede";
 import { useEffect, useRef } from "react";
 import inViewport from "../utils/inViewport";
+import SectionTitle from "../components/SectionTitle";
 
 const tick = (agent: Agent) => {
   const dir = new Vector(agent.get("vx"), agent.get("vy"));
@@ -40,8 +41,9 @@ const tick = (agent: Agent) => {
 
 const Work = () => {
   const container = useRef<HTMLDivElement>();
+
   useEffect(() => {
-    const [width, height] = [window.innerWidth / 2, 400];
+    const [width, height] = [window.innerWidth, 400];
     const environment = new Environment({ width, height });
     const renderer = new CanvasRenderer(environment, { width, height });
     renderer.mount(container.current);
@@ -95,12 +97,13 @@ const Work = () => {
       container.current.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
+
   return (
     <Section>
       <Grid>
-        <Column width={2} />
-        <Column width={8}>
-          <h3>Work</h3>
+        <Column width={2} largeWidth={1} medWidth={12} />
+        <Column width={8} medWidth={12}>
+          <SectionTitle>Work</SectionTitle>
           <Lede sub>
             Our flagship product, <a href="https://flocc.network">Flocc</a>, is
             an open-source JavaScript library for agent-based modeling.
@@ -108,8 +111,8 @@ const Work = () => {
         </Column>
       </Grid>
       <Grid>
-        <Column width={2} />
-        <Column width={4}>
+        <Column width={2} largeWidth={1} medWidth={12} />
+        <Column width={4} largeWidth={5} medWidth={12}>
           <p>
             We’ve also built products for the City of San José, Accion
             International, Books@Work, and other organizations.

@@ -3,6 +3,7 @@ import Column from "../components/Column";
 import styled from "styled-components";
 import Section from "../components/Section";
 import Lede from "../components/Lede";
+import SectionTitle from "../components/SectionTitle";
 
 const List = styled.ul`
   list-style-type: none;
@@ -37,22 +38,22 @@ const About = () => (
     <Section>
       <P1>
         <Grid>
-          <Column width={2} />
-          <Column width={8}>
-            <h3>About</h3>
+          <Column width={2} largeWidth={1} medWidth={12} />
+          <Column width={8} smallWidth={12}>
+            <SectionTitle>About</SectionTitle>
             <Lede sub>
               Our overarching goal is to make complexity approachable and
               understandable.
             </Lede>
           </Column>
-          <Column width={2}>
+          <Column width={2} largeWidth={3} medWidth={4} smallWidth={12}>
             <img src="/static/logo.png" alt="" style={{ width: "100%" }} />
           </Column>
         </Grid>
       </P1>
       <Grid>
-        <Column width={4} />
-        <Column width={6}>
+        <Column width={4} largeWidth={3} medWidth={2} smallWidth={12} />
+        <Column width={6} medWidth={10} smallWidth={12}>
           <p>
             With the web as a medium, our digital products range from
             user-facing websites and apps to data visualizations to tools for
@@ -65,8 +66,8 @@ const About = () => (
         </Column>
       </Grid>
       <Grid>
-        <Column width={4} />
-        <Column width={6} largeWidth={8}>
+        <Column width={4} medWidth={2} smallWidth={12} />
+        <Column width={6} largeWidth={8} medWidth={10} smallWidth={10}>
           <h4>Specialties</h4>
           <Grid nested>
             <Column width={6}>
