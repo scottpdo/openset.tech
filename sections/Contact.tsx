@@ -3,6 +3,7 @@ import Column from "../components/Column";
 import Section from "../components/Section";
 import SectionTitle from "../components/SectionTitle";
 import styled from "styled-components";
+import { useState, useRef } from "react";
 
 const Label = styled.label`
   display: block;
@@ -82,48 +83,88 @@ const Button = styled.button`
   }
 `;
 
-const Contact = () => (
-  <Section>
-    <Grid>
-      <Column width={2} largeWidth={1} medWidth={12} />
-      <Column width={4} largeWidth={5} medWidth={12}>
-        <SectionTitle>Contact</SectionTitle>
-      </Column>
-    </Grid>
-    <Grid>
-      <Column width={2} largeWidth={1} medWidth={12} />
-      <Column width={4} largeWidth={5} medWidth={12}>
-        <p style={{ marginTop: 0 }}>
-          For general inquiries, email{" "}
-          <a href="mailto:hello@openset.tech">hello@openset.tech</a> or fill out
-          this form.
-        </p>
-      </Column>
-      <Column width={6} medWidth={12}>
-        <form action="" method="POST">
-          <Label htmlFor="name">
-            <Input name="name" id="name" type="text" required placeholder=" " />
-            <span>Name</span>
-          </Label>
-          <Label htmlFor="email">
-            <Input
-              name="email"
-              id="email"
-              type="email"
-              required
-              placeholder=" "
-            />
-            <span>Email</span>
-          </Label>
-          <Label htmlFor="message">
-            <Input as="textarea" name="message" id="message" placeholder=" " />
-            <span>Message</span>
-          </Label>
-          <Button>Send</Button>
-        </form>
-      </Column>
-    </Grid>
-  </Section>
-);
+const Contact = () => {
+  const [submitted, setSubmitted] = useState(false);
+  const form = useRef<HTMLFormElement>();
+  const formURL =
+    "https://script.google.com/macros/s/AKfycbxcJUO7z9UW0MG30WtR2GvdGVeTIqNi7Mged52e-VTlNmf6luBx/exec";
+  return (
+    <Section>
+      <Grid>
+        <Column width={2} largeWidth={1} medWidth={12} />
+        <Column width={4} largeWidth={5} medWidth={12}>
+          <SectionTitle>Contact</SectionTitle>
+        </Column>
+      </Grid>
+      <Grid>
+        <Column width={2} largeWidth={1} medWidth={12} />
+        <Column width={4} largeWidth={5} medWidth={12}>
+          <p style={{ marginTop: 0 }}>
+            For general inquiries, email{" "}
+            <a href="mailto:hello@openset.tech">hello@openset.tech</a> or fill
+            out this form.
+          </p>
+        </Column>
+        <Column width={6} medWidth={12}>
+          {!submitted ? (
+            <form
+              action={formURL}
+              method="POST"
+              ref={form}
+              onSubmit={e => {
+                e.preventDefault();
+                const body = new FormData();
+                const elements = Array.from(form.current.elements);
+                elements.forEach((el: HTMLInputElement) => {
+                  if (el.name && el.value) {
+                    body.append(el.name, el.value);
+                  }
+                });
+                fetch(formURL, {
+                  method: "POST",
+                  body,
+                });
+                setSubmitted(true);
+              }}
+            >
+              <Label htmlFor="name">
+                <Input
+                  name="name"
+                  id="name"
+                  type="text"
+                  required
+                  placeholder=" "
+                />
+                <span>Name</span>
+              </Label>
+              <Label htmlFor="email">
+                <Input
+                  name="email"
+                  id="email"
+                  type="email"
+                  required
+                  placeholder=" "
+                />
+                <span>Email</span>
+              </Label>
+              <Label htmlFor="message">
+                <Input
+                  as="textarea"
+                  name="message"
+                  id="message"
+                  placeholder=" "
+                />
+                <span>Message</span>
+              </Label>
+              <Button>Send</Button>
+            </form>
+          ) : (
+            "Thanks for getting in touch."
+          )}
+        </Column>
+      </Grid>
+    </Section>
+  );
+};
 
 export default Contact;
