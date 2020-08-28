@@ -28,7 +28,7 @@ const Input = styled.input`
   font-family: "Yrsa", "Times New Roman", Times, serif;
   font-size: 1rem;
   width: 100%;
-  box-shadow: inset 3px -3px 0 0px #00f;
+  box-shadow: inset 2px -2px 0 0px #00f;
   border: 0 none;
   border-radius: 0;
   padding: 10px 10px 10px 8px;
@@ -83,6 +83,10 @@ const Button = styled.button`
   }
 `;
 
+const Info = styled.p`
+  margin-top: 0;
+`;
+
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const form = useRef<HTMLFormElement>();
@@ -98,12 +102,12 @@ const Contact = () => {
       </Grid>
       <Grid>
         <Column width={2} largeWidth={1} medWidth={12} />
-        <Column width={4} largeWidth={5} medWidth={12}>
-          <p style={{ marginTop: 0 }}>
+        <Column width={3} largeWidth={5} medWidth={12}>
+          <Info>
             For general inquiries, email{" "}
             <a href="mailto:hello@openset.tech">hello@openset.tech</a> or fill
             out this form.
-          </p>
+          </Info>
         </Column>
         <Column width={6} medWidth={12}>
           {!submitted ? (
