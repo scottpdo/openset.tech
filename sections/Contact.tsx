@@ -23,14 +23,16 @@ const Label = styled.label`
 
 const Input = styled.input`
   background: transparent;
+  border: 1px solid #00f;
+  border-radius: 2px;
+  border-top-width: 0;
+  border-right-width: 0;
   display: block;
   color: #424242;
   font-family: "Yrsa", "Times New Roman", Times, serif;
   font-size: 1rem;
   width: 100%;
-  box-shadow: inset 2px -2px 0 0px #00f;
-  border: 0 none;
-  border-radius: 0;
+  /* box-shadow: inset 1px -1px 0 0px #00f; */
   padding: 10px 10px 10px 8px;
   margin-bottom: 20px;
 
@@ -51,23 +53,23 @@ const Button = styled.button`
   font-size: 24px;
   padding: 6px 20px;
   border: 0 none;
-  border-radius: 0;
+  border-radius: 2px;
   font-family: "Yrsa", "Times New Roman", Times, serif;
   float: right;
   cursor: pointer;
 
   &:after {
-    content: "";
+    /* content: "";
     display: block;
     height: 100%;
     width: 100%;
     position: absolute;
-    border: 3px solid #00f;
+    border: 1px solid #00f;
     z-index: -1;
     transform: translate3d(6px, 5px, 0);
     top: 0;
     left: 0;
-    transition: 0.3s transform;
+    transition: 0.3s transform; */
   }
 
   &:hover {

@@ -31,7 +31,7 @@ const Who = () => {
       </Grid>
       <Grid>
         <Column width={2} largeWidth={1} medWidth={12} />
-        <Column width={2} largeWidth={3} medWidth={4} xSmallWidth={12}>
+        <Column width={3} largeWidth={3} medWidth={4} xSmallWidth={12}>
           <noscript>
             <img
               src="/static/scott.png"

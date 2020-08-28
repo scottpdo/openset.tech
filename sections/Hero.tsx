@@ -34,12 +34,38 @@ const Header = styled.header`
   }
 `;
 
+const fadeInAnim = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
 const HeaderLogo = styled.img`
+  animation: 1s ${fadeInAnim};
   margin-right: 20px;
   width: 52px;
 `;
 
+const HeaderH1 = styled.h1`
+  animation: 1s ${fadeInAnim};
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+`;
+
+const HeaderH2 = styled.h2`
+  animation: 1s ${fadeInAnim};
+  animation-delay: 1s;
+  animation-fill-mode: both;
+`;
+
 const HeroLede = styled(Lede)`
+  font-size: 76px;
+  line-height: 1.4;
   max-width: none;
   margin: 180px auto;
   text-align: center;
@@ -104,7 +130,9 @@ const fragShader = `
   void main() {
 
     // pixel size
-    float scale = 60.0 * pow(abs(cos(u_time / 2.0)), 3.0);
+    float scale = 30.0 * pow(abs(cos(u_time / 4.5)), 5.0);
+
+    // transform origin
     float xf = 0.5;
     float yf = -0.8;
 
@@ -115,17 +143,6 @@ const fragShader = `
     vec4 color = texture2D(u_texture, pix);
 
     gl_FragColor = color;
-  }
-`;
-
-const fadeInAnim = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 `;
 
@@ -149,7 +166,8 @@ const Hero = () => {
   };
 
   const populate = () => {
-    ref.current.innerHTML = "<b style='opacity: 0;'>complex&nbsp;systems</b>";
+    ref.current.innerHTML =
+      "<b style='opacity: 0;'>to explore, visualize, and analyze<br />complex&nbsp;systems</b>";
 
     const { width, height } = ref.current.getBoundingClientRect();
     const bufferCanvas = createCanvas(width, height);
@@ -158,8 +176,18 @@ const Hero = () => {
     const buffer = bufferCanvas.getContext("2d");
     buffer.font = `bold ${style.fontSize} ${style.fontFamily}`;
     buffer.fillStyle = "#00f";
+    buffer.textAlign = "center";
     buffer.textBaseline = "hanging";
-    buffer.fillText("complex systems", 0, parseInt(style.fontSize) / 6);
+    buffer.fillText(
+      "to explore, visualize, and analyze",
+      width / 2,
+      parseInt(style.fontSize) / 6
+    );
+    buffer.fillText(
+      "complex systems",
+      width / 2,
+      (9.0 * parseInt(style.fontSize)) / 6
+    );
 
     const dataURL = bufferCanvas.toDataURL();
     const canvas = createCanvas(width, height);
@@ -194,8 +222,8 @@ const Hero = () => {
           <Branding>
             <HeaderLogo src="/static/logo.png" alt="" />
             <div>
-              <h1>Open Set</h1>
-              <h2>Software Design + Research</h2>
+              <HeaderH1>Open Set</HeaderH1>
+              <HeaderH2>Software Design + Research</HeaderH2>
             </div>
           </Branding>
         </Column>
@@ -203,14 +231,9 @@ const Hero = () => {
       <Grid>
         <Column width={12}>
           <HeroLede>
-            Open Set designs and builds software{" "}
-            <FadeIn>
-              to explore, visualize, and analyze{" "}
-              <noscript>
-                <b>complex&nbsp;systems</b>
-              </noscript>
-              <span ref={ref} />
-            </FadeIn>
+            Open Set designs and&nbsp;builds&nbsp;software
+            <br />
+            <span ref={ref} />
           </HeroLede>
         </Column>
       </Grid>

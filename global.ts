@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import * as Breakpoints from "./styles/breakpoints";
 
 export default createGlobalStyle`
     *,
@@ -82,7 +83,13 @@ export default createGlobalStyle`
     }
     
     :root {
-        font-size: 20px;
+        font-size: 22px;
+    }
+
+    @media screen and (max-width: ${Breakpoints.XL}px) {
+        :root {
+            font-size: 20px;
+        }
     }
 
     @media screen and (max-width: 1200px) {

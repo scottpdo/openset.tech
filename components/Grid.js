@@ -8,8 +8,8 @@ import * as Breakpoints from "../styles/breakpoints";
 const StyledGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding-left: ${props => (props.nested ? 0 : 3 * XLARGE)}px;
-  padding-right: ${props => (props.nested ? 0 : 3 * XLARGE)}px;
+  padding-left: ${props => (props.nested ? 0 : 2.5 * XLARGE)}px;
+  padding-right: ${props => (props.nested ? 0 : 2.5 * XLARGE)}px;
   width: 100%;
 
   @media screen and (max-width: ${Breakpoints.XL}px) {

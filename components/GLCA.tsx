@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Column from "./Column";
 import Grid from "./Grid";
 
-const scale = 2;
+const scale = 5;
 
 const Container = styled.canvas`
   position: absolute;
@@ -95,18 +95,11 @@ const fragShader = (direction: "up" | "down" | "left" | "right") => {
           : ""
       }
       ${
-        direction === "left"
-          ? `if (r > pow(nx / 50.0, 0.5)) color = WHITE;`
-          : ""
-      }
-      ${
-        direction === "right"
-          ? `if (r < pow(nx / (u_width / u_scale), 2.0)) color = WHITE;`
-          : ""
-      }
-      ${
         direction === "left" || direction === "right"
-          ? "if (r2 > (ny + 4.0) / u_height || r2 < (ny - 4.0) / u_height) color = WHITE;"
+          ? `if (r > smoothstep(0.0, 1.0, ny / (u_height / 4.0)) ||
+                 r > smoothstep(0.0, 1.0, (u_height - ny) / (u_height / 4.0)) ) { 
+              color = WHITE; 
+            }`
           : ""
       }
 
@@ -124,11 +117,7 @@ const GLCA = ({
 }) => {
   if (typeof window === "undefined") return null;
 
-  let width =
-    ((direction === "left" || direction === "right" ? 0.667 : 1) *
-      window.innerWidth) |
-    0;
-  while (width % scale !== 0) width++;
+  const width = window.innerWidth;
 
   const ref = useRef();
 
@@ -142,12 +131,9 @@ const GLCA = ({
   }, []);
 
   return (
-    <Grid nested={direction === "up" || direction === "down"}>
+    <Grid nested>
       {direction === "left" && <Column width={4} />}
-      <Column
-        width={direction === "up" || direction === "down" ? 12 : 8}
-        style={{ height: scale * height }}
-      >
+      <Column width={12} style={{ height: scale * height }}>
         <Container
           ref={ref}
           style={direction === "right" ? { right: 0 } : {}}

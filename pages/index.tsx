@@ -29,7 +29,7 @@ const Index = () => {
       <Wrapper>
         {/* <GLCA direction="down" height={21} /> */}
         <Hero />
-        {/* <GLCA direction="left" height={14} /> */}
+        <GLCA direction="left" height={42} />
         <About />
         {/* <GLCA direction="right" height={14} /> */}
         <Work />

@@ -14,27 +14,27 @@ const StyledColumn = styled.div`
       ${props => sub(SMALL, props.xSmallWidth)}px
   );
   @media screen and (min-width: ${S + 1}px) {
-    margin-bottom: ${props => (props.marginBottom ? SMALL : 0)}px;
-    margin-right: ${props => (props.Slast ? 0 : SMALL)}px;
+    margin-bottom: ${props => (props.marginBottom ? 2 * SMALL : 0)}px;
+    margin-right: ${props => (props.Slast ? 0 : 2 * SMALL)}px;
     width: calc(
       ${props => (100 * props.smallWidth) / 12}% -
-        ${props => sub(SMALL, props.smallWidth)}px
+        ${props => sub(2 * SMALL, props.smallWidth)}px
     );
   }
   @media screen and (min-width: ${M + 1}px) {
-    margin-bottom: ${props => (props.marginBottom ? SMALL : 0)}px;
-    margin-right: ${props => (props.Mlast ? 0 : SMALL)}px;
+    margin-bottom: ${props => (props.marginBottom ? 2 * SMALL : 0)}px;
+    margin-right: ${props => (props.Mlast ? 0 : 2 * SMALL)}px;
     width: calc(
       ${props => (100 * props.medWidth) / 12}% -
-        ${props => sub(SMALL, props.medWidth)}px
+        ${props => sub(2 * SMALL, props.medWidth)}px
     );
   }
   @media screen and (min-width: ${L + 1}px) {
-    margin-bottom: ${props => (props.marginBottom ? SMALL : 0)}px;
-    margin-right: ${props => (props.Llast ? 0 : SMALL)}px;
+    margin-bottom: ${props => (props.marginBottom ? 2 * SMALL : 0)}px;
+    margin-right: ${props => (props.Llast ? 0 : 2 * SMALL)}px;
     width: calc(
       ${props => (100 * props.largeWidth) / 12}% -
-        ${props => sub(SMALL, props.largeWidth)}px
+        ${props => sub(2 * SMALL, props.largeWidth)}px
     );
   }
   @media screen and (min-width: ${XL + 1}px) {
@@ -44,9 +44,6 @@ const StyledColumn = styled.div`
       ${props => (100 * props.width) / 12}% -
         ${props => sub(2 * SMALL, props.width)}px
     );
-  }
-  @media print {
-    display: ${props => (props.hidePrint ? "none !important" : "block")};
   }
 `;
 
