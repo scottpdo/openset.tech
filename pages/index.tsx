@@ -9,6 +9,7 @@ import Contact from "../sections/Contact";
 import Hero from "../sections/Hero";
 import { useEffect } from "react";
 import GLCA from "../components/GLCA";
+import GLSwarm from "../components/GLSwarm";
 
 const Index = () => {
   const onMouseMove = (e: MouseEvent) => {
@@ -29,13 +30,13 @@ const Index = () => {
       <Wrapper>
         {/* <GLCA direction="down" height={21} /> */}
         <Hero />
-        <GLCA direction="left" height={42} />
+        <GLSwarm direction="left" height={42} />
         <About />
-        {/* <GLCA direction="right" height={14} /> */}
+        {/* <GLCA direction="left" height={42} /> */}
         <Work />
-        {/* <GLCA direction="left" height={14} /> */}
+        {/* <GLCA direction="left" height={42} /> */}
         <Who />
-        {/* <GLCA direction="right" height={14} /> */}
+        {/* <GLCA direction="left" height={42} /> */}
         <Contact />
         {/* <GLCA direction="up" height={21} /> */}
       </Wrapper>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Column from "./Column";
 import Grid from "./Grid";
 
-const scale = 5;
+const scale = 1;
 
 const Container = styled.canvas`
   position: absolute;
@@ -21,7 +21,6 @@ const fragShader = (direction: "up" | "down" | "left" | "right") => {
     uniform float u_time;
     uniform float u_height;
     uniform float u_width;
-    uniform float u_scale;
 
     vec4 BLUE = vec4(0.0, 0.0, 1.0, 1.0);
     vec4 WHITE = vec4(1.0);
@@ -62,9 +61,9 @@ const fragShader = (direction: "up" | "down" | "left" | "right") => {
     }
 
     void main() {
-      float nx = floor(gl_FragCoord.x / u_scale);
-      float nxt = floor(gl_FragCoord.x / u_scale) - u_time * 10.0;
-      float ny = floor(gl_FragCoord.y / u_scale);
+      float nx = floor(gl_FragCoord.x);
+      float nxt = floor(gl_FragCoord.x) - u_time * 10.0;
+      float ny = floor(gl_FragCoord.y);
       vec2 st = vec2(nx, ny);
 
       float speed = 1.0;
@@ -77,27 +76,12 @@ const fragShader = (direction: "up" | "down" | "left" | "right") => {
       float r = random2(st);
       float r2 = pow(r, 2.0);
 
-      vec4 color = vec4(
-        r > mightChange ? BLUE.r : WHITE.r,
-        r > mightChange ? BLUE.g : WHITE.g,
-        r > mightChange ? BLUE.b : WHITE.b,
-        1.0
-      );
+      vec4 color = mix(BLUE, WHITE, 0.5);
 
       // fade out
       ${
-        direction === "down"
-          ? `if (r > pow((ny + 1.0) / u_height, 0.5)) color = WHITE;`
-          : ""
-      }
-      ${
-        direction === "up"
-          ? `if (r < pow((ny - 1.0) / u_height, 0.5)) color = WHITE;`
-          : ""
-      }
-      ${
         direction === "left" || direction === "right"
-          ? `if (r > 0.25 * sin((2.0 * ny + nxt) / 20.0) + smoothstep(0.0, 1.0, ny / (u_height / 4.0)) ||
+          ? `if (r > smoothstep(0.0, 1.0, ny / (u_height / 4.0)) ||
                  r > smoothstep(0.0, 1.0, (u_height - ny) / (u_height / 4.0)) ) { 
               color = WHITE; 
             }`
@@ -109,7 +93,7 @@ const fragShader = (direction: "up" | "down" | "left" | "right") => {
   `;
 };
 
-const GLCA = ({
+const GLSwarm = ({
   direction,
   height = 4,
 }: {
@@ -128,17 +112,16 @@ const GLCA = ({
     canvas.load(fragShader(direction));
     canvas.setUniform("u_height", height);
     canvas.setUniform("u_width", width);
-    canvas.setUniform("u_scale", scale);
   }, []);
 
   return (
     <Grid nested>
       {direction === "left" && <Column width={4} />}
-      <Column width={12} style={{ height: scale * height }}>
+      <Column width={12} style={{ height }}>
         <Container
           ref={ref}
           style={direction === "right" ? { right: 0 } : {}}
-          height={scale * height}
+          height={height}
           width={width}
         />
       </Column>
@@ -147,4 +130,4 @@ const GLCA = ({
   );
 };
 
-export default GLCA;
+export default GLSwarm;

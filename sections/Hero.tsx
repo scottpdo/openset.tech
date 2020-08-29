@@ -3,7 +3,7 @@ import * as Breakpoints from "../styles/breakpoints";
 import Grid from "../components/Grid";
 import Column from "../components/Column";
 import Lede from "../components/Lede";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import GlslCanvas from "../lib/GlslCanvas";
 
 const Branding = styled.div`
@@ -64,22 +64,22 @@ const HeaderH2 = styled.h2`
 `;
 
 const HeroLede = styled(Lede)`
-  font-size: 76px;
+  font-size: 5vw !important;
   line-height: 1.4;
   max-width: none;
   margin: 180px auto;
   text-align: center;
 
   @media screen and (max-width: ${Breakpoints.XL}px) {
-    margin: 160px auto;
+    margin: 135px auto;
   }
 
   @media screen and (max-width: ${Breakpoints.L}px) {
-    margin: 140px auto;
+    margin: 120px auto;
   }
 
   @media screen and (max-width: ${Breakpoints.M}px) {
-    margin: 120px auto;
+    margin: 100px auto;
   }
 `;
 
@@ -96,6 +96,7 @@ const fragShader = `
 
   vec4 WHITE = vec4(1.0);
   vec4 BLUE = vec4(0.0, 0.0, 1.0, 1.0);
+  vec4 RED = vec4(1.0, 0.0, 0.0, 1.0);
 
   float random(float x) {
     return fract(sin(x) * 100000.0);
@@ -130,7 +131,7 @@ const fragShader = `
   void main() {
 
     // pixel size
-    float scale = 30.0 * pow(abs(cos(u_time / 4.5)), 5.0);
+    float scale = 30.0 * pow(abs(cos(u_time / 4.5)), 4.0);
 
     // transform origin
     float xf = 0.5;
@@ -141,6 +142,10 @@ const fragShader = `
 
     vec2 pix = vec2(nx, ny);
     vec4 color = texture2D(u_texture, pix);
+
+    // if (gl_FragCoord.x < 15. && gl_FragCoord.y < 15.) {
+    //   color = RED;
+    // }
 
     gl_FragColor = color;
   }
@@ -154,58 +159,69 @@ const FadeIn = styled.span`
 
 const Hero = () => {
   const ref = useRef<HTMLSpanElement>();
+  let gl = null;
 
-  const createCanvas = (width: number, height: number): HTMLCanvasElement => {
+  const [width, height] = [864, 182];
+
+  const createCanvas = (): HTMLCanvasElement => {
     const canvas = document.createElement("canvas");
     canvas.style.position = "absolute";
     canvas.style.top = "0px";
     canvas.style.left = "0px";
-    canvas.width = width;
-    canvas.height = height;
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.width = width * 2;
+    canvas.height = height * 2;
     return canvas;
   };
 
   const populate = () => {
     ref.current.innerHTML =
-      "<b style='opacity: 0;'>to explore, visualize, and analyze<br />complex&nbsp;systems</b>";
+      "<b style='color: #fff; display: inline-block;'>to explore, visualize, and analyze<br />complex&nbsp;systems</b>";
 
-    const { width, height } = ref.current.getBoundingClientRect();
-    const bufferCanvas = createCanvas(width, height);
+    const bufferCanvas = createCanvas();
 
     const style = getComputedStyle(ref.current);
     const buffer = bufferCanvas.getContext("2d");
-    buffer.font = `bold ${style.fontSize} ${style.fontFamily}`;
+    const fontSize = 131;
+    buffer.font = `bold ${fontSize}px ${style.fontFamily}`;
     buffer.fillStyle = "#00f";
     buffer.textAlign = "center";
     buffer.textBaseline = "hanging";
-    buffer.fillText(
-      "to explore, visualize, and analyze",
-      width / 2,
-      parseInt(style.fontSize) / 6
-    );
-    buffer.fillText(
-      "complex systems",
-      width / 2,
-      (9.0 * parseInt(style.fontSize)) / 6
-    );
+    buffer.fillText("to explore, visualize, and analyze", width, 25);
+    buffer.fillText("complex systems", width, 210);
 
     const dataURL = bufferCanvas.toDataURL();
-    const canvas = createCanvas(width, height);
-    ref.current.appendChild(canvas);
+    const canvas = createCanvas();
+    ref.current.querySelector("b").appendChild(canvas);
+
+    canvas.addEventListener("click", () => {
+      canvas.width += 10;
+    });
 
     // @ts-ignore
-    const gl = new GlslCanvas(canvas);
+    gl = new GlslCanvas(canvas);
     gl.load(fragShader);
-    gl.setUniform("u_width", width);
-    gl.setUniform("u_height", height);
+    gl.setUniform("u_width", width * 2);
+    gl.setUniform("u_height", 182 * 2);
     gl.setUniform("u_texture", dataURL);
   };
 
   const onResize = () => {
-    const canvas = ref.current.querySelector("canvas");
-    const { width, height } = ref.current.getBoundingClientRect();
-    canvas.style.width = width + "px";
-    canvas.style.height = height + "px";
+    // const canvas = ref.current.querySelector("canvas");
+    // const { width, height } = canvas.parentElement.getBoundingClientRect();
+    // gl.setUniform("u_width", width);
+    // gl.setUniform("u_height", height);
+    // while (canvas.width > 2 * width) {
+    //   console.log(canvas.width);
+    //   canvas.width -= 1;
+    // }
+    // console.log(canvas.width, width);
+    // canvas.width = width;
+    // console.log(canvas.width);
+    // canvas.height = height;
+    // canvas.style.width = width + "px";
+    // canvas.style.height = height + "px";
   };
 
   useEffect(() => {
@@ -233,7 +249,7 @@ const Hero = () => {
           <HeroLede>
             Open Set designs and&nbsp;builds&nbsp;software
             <br />
-            <span ref={ref} />
+            <span ref={ref} style={{ display: "block" }} />
           </HeroLede>
         </Column>
       </Grid>
