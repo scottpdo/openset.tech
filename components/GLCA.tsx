@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Column from "./Column";
 import Grid from "./Grid";
 
-const scale = 1;
+const scale = 2;
 
 const Container = styled.canvas`
   position: absolute;

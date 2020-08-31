@@ -51,7 +51,7 @@ const Grid = ({ children, nested = false, ...props }) => {
   let XScols = 0;
 
   return (
-    <StyledGrid nested={nested}>
+    <StyledGrid nested={nested} {...props}>
       {Children.toArray(children).map(child => {
         const useProps = (key, fallback) => use(child.props, key, fallback);
 

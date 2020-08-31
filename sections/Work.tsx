@@ -122,7 +122,7 @@ const Work = () => {
   return (
     <Section dir="right">
       <Grid>
-        <Column width={8} medWidth={12}>
+        <Column width={9} medWidth={12}>
           <SectionTitle>Work</SectionTitle>
           <Lede sub>
             Our flagship product,{" "}

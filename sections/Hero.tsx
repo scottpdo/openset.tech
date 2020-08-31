@@ -18,10 +18,18 @@ const Branding = styled.div`
 `;
 
 const Header = styled.header`
-  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  padding-top: 60px;
 
   @media screen and (max-width: ${Breakpoints.L}px) {
-    margin: 40px auto;
+    padding: 40px 0;
+  }
+
+  @media screen and (max-width: ${Breakpoints.M}px) {
+    height: 90vh;
   }
 
   h1,
@@ -63,7 +71,6 @@ const HeroLede = styled(Lede)`
   font-size: 5vw !important;
   line-height: 1.4;
   max-width: none;
-  margin: 180px auto;
   text-align: center;
 
   & > div {
@@ -71,17 +78,19 @@ const HeroLede = styled(Lede)`
     animation-fill-mode: both;
     animation-delay: 0.333s;
   }
+`;
 
-  @media screen and (max-width: ${Breakpoints.XL}px) {
-    margin: 135px auto;
-  }
-
-  @media screen and (max-width: ${Breakpoints.L}px) {
-    margin: 120px auto;
-  }
-
+const HeroLedeLargeScreen = styled(HeroLede)`
   @media screen and (max-width: ${Breakpoints.M}px) {
-    margin: 100px auto;
+    display: none;
+  }
+`;
+
+const HeroLedeSmallScreen = styled(HeroLede)`
+  display: none;
+  font-size: 40px !important;
+  @media screen and (max-width: ${Breakpoints.M}px) {
+    display: block;
   }
 `;
 
@@ -252,20 +261,26 @@ const Hero = () => {
           </ColumnFiller>
         </Column>
       </Grid>
-      <Grid>
+      <Grid style={{ flexGrow: 2 }}>
         <Column width={12}>
-          <HeroLede as="div">
-            Open Set designs and&nbsp;builds&nbsp;software{" "}
-            <div>
-              <span ref={ref} style={{ display: "block" }}>
-                <b style={{ color: "#fff", display: "inline-block" }}>
-                  to explore, visualize, and analyze
-                  <br />
-                  complex&nbsp;systems
-                </b>
-              </span>
-            </div>
-          </HeroLede>
+          <ColumnFiller>
+            <HeroLedeLargeScreen as="div">
+              Open Set designs and&nbsp;builds&nbsp;software{" "}
+              <div>
+                <span ref={ref} style={{ display: "block" }}>
+                  <b style={{ color: "#fff", display: "inline-block" }}>
+                    to explore, visualize, and analyze
+                    <br />
+                    complex&nbsp;systems
+                  </b>
+                </span>
+              </div>
+            </HeroLedeLargeScreen>
+            <HeroLedeSmallScreen as="div">
+              Open Set designs and builds software to explore, visualize, and
+              analyze <b>complex&nbsp;systems</b>
+            </HeroLedeSmallScreen>
+          </ColumnFiller>
         </Column>
       </Grid>
     </Header>

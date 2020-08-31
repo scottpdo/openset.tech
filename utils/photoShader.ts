@@ -44,9 +44,15 @@ const photoShader = `
     float scale = 5.0 + 35.0 * (sin(u_time) + 1.0);
     vec2 st = (gl_FragCoord.xy + vec2(0.5)) / u_resolution.xy;
     vec2 pix = floor(scale * st) / scale;
-    bool shouldPix = noise(vec2(pix.x + sin(u_time), pix.y - cos(u_time))) > 0.6;
+    float noiseValue = noise(vec2(pix.x + sin(u_time), pix.y - cos(u_time)));
+    bool shouldPix = noiseValue > 0.5;
     vec2 where = shouldPix ? pix : st;
     vec4 color = texture2D(u_texture, where);
+    if (shouldPix) {
+      color.r += pow(max(noiseValue - 0.6, 0.0), 1.5);
+      color.g += pow(max(noiseValue - 0.6, 0.0), 1.5);
+      color.b += pow(max(noiseValue - 0.6, 0.0), 1.5);
+    }
     gl_FragColor = color;
   }
 `;

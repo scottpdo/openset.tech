@@ -15,6 +15,7 @@ import {
 } from "flocc";
 import inViewport from "../utils/inViewport";
 import { M } from "../styles/breakpoints";
+import ColumnFiller from "../components/ColumnFiller";
 
 const TableTitle = styled.h4`
   margin: 0.5rem 0 0 0;
@@ -26,7 +27,7 @@ const List = styled.ul`
   padding-left: 0;
 
   li {
-    align-items: center;
+    /* align-items: center; */
     display: flex;
     line-height: 1.2;
     margin-bottom: 0.4em;
@@ -34,7 +35,9 @@ const List = styled.ul`
     &:before {
       content: "◑";
       margin-right: 8px;
-      color: #00f;
+      font-size: 0.8em;
+      top: 0.2em;
+      /* color: #00f; */
     }
     &:nth-child(2n) {
       &:before {
@@ -54,7 +57,7 @@ const Container = styled.div`
   canvas {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 40px;
 
     @media screen and (max-width: ${M}px) {
       right: -24px;
@@ -101,7 +104,7 @@ const About = () => {
         if (value < alpha) alpha = value;
       }
 
-      agent.set("color", `rgba(0, 0, 255, ${alpha}`);
+      agent.set("color", `rgba(255, 255, 255, ${alpha}`);
 
       pts.forEach(pt => {
         const d = utils.distance(agent, pt);
@@ -130,7 +133,7 @@ const About = () => {
     for (let i = 0; i < 400; i++) {
       const dir = utils.random(0, 2 * Math.PI, true);
       const agent = new Agent({
-        color: "#00f",
+        color: "#fff",
         x: utils.random(0, width),
         y: utils.random(0, height),
         vx: Math.cos(dir),
@@ -182,10 +185,10 @@ const About = () => {
   }, []);
 
   return (
-    <Section first>
+    <Section blue first>
       <P1>
         <Grid>
-          <Column width={8} smallWidth={12}>
+          <Column width={10} smallWidth={12}>
             <SectionTitle>About</SectionTitle>
             <Lede sub>
               Our overarching goal is to make complexity approachable and
@@ -195,10 +198,12 @@ const About = () => {
         </Grid>
       </P1>
       <Grid>
-        <Column width={4} smallWidth={12}>
-          <Container ref={container} />
+        <Column width={6} smallWidth={12}>
+          <ColumnFiller style={{ alignItems: "flex-end" }}>
+            <Container ref={container} />
+          </ColumnFiller>
         </Column>
-        <Column width={6} largeWidth={8} smallWidth={12}>
+        <Column width={6} smallWidth={12}>
           <p>
             With the web as a medium, our digital products range from
             user-facing websites and apps to data visualizations to tools for
@@ -208,54 +213,49 @@ const About = () => {
             By thoughtfully designing and building software, we help people
             struggling with complex systems to make sense of them.
           </p>
-          <Grid nested>
-            <Column width={1} medWidth={12} />
-            <Column width={11} medWidth={12}>
-              <TableTitle>Specialties</TableTitle>
-              <List>
-                <Grid nested>
-                  <Column width={6} xSmallWidth={12}>
-                    <li>Full-Stack Web Development</li>
-                    <li>Interactive Data Visualization</li>
-                    <li>Agent-Based Modeling and Simulation</li>
-                  </Column>
-                  <Column width={6} xSmallWidth={12}>
-                    <li>SMS (Text Message) Driven Products</li>
-                    <li>Natural Language Processing</li>
-                  </Column>
-                </Grid>
-              </List>
-              <TableTitle>Platforms</TableTitle>
-              <List>
-                <Grid nested>
-                  <Column width={6} xSmallWidth={12}>
-                    <li>Web and Responsive/Mobile Web</li>
-                    <li>Single-Page Apps</li>
-                    <li>Serverless</li>
-                  </Column>
-                  <Column width={6} xSmallWidth={12}>
-                    <li>Desktop: OSX, Windows, Linux</li>
-                    <li>SMS</li>
-                  </Column>
-                </Grid>
-              </List>
-              <TableTitle>Technologies</TableTitle>
-              <List>
-                <Grid nested>
-                  <Column width={6} xSmallWidth={12}>
-                    <li>Next.js</li>
-                    <li>Gatsby</li>
-                    <li>Three.js</li>
-                  </Column>
-                  <Column width={6} xSmallWidth={12}>
-                    <li>React</li>
-                    <li>Django</li>
-                    <li>WordPress</li>
-                  </Column>
-                </Grid>
-              </List>
-            </Column>
-          </Grid>
+          <TableTitle>Specialties</TableTitle>
+          <List>
+            <Grid nested>
+              <Column width={6} xSmallWidth={12}>
+                <li>Full-Stack Web Development</li>
+                <li>Interactive Data Visualization</li>
+                <li>Agent-Based Modeling and Simulation</li>
+              </Column>
+              <Column width={6} xSmallWidth={12}>
+                <li>SMS (Text Message) Driven Products</li>
+                <li>Natural Language Processing</li>
+              </Column>
+            </Grid>
+          </List>
+          <TableTitle>Platforms</TableTitle>
+          <List>
+            <Grid nested>
+              <Column width={6} xSmallWidth={12}>
+                <li>Web and Responsive/Mobile Web</li>
+                <li>Single-Page Apps</li>
+                <li>Serverless</li>
+              </Column>
+              <Column width={6} xSmallWidth={12}>
+                <li>Desktop: OSX, Windows, Linux</li>
+                <li>SMS</li>
+              </Column>
+            </Grid>
+          </List>
+          <TableTitle>Technologies</TableTitle>
+          <List>
+            <Grid nested>
+              <Column width={6} xSmallWidth={12}>
+                <li>Next.js</li>
+                <li>Gatsby</li>
+                <li>Three.js</li>
+              </Column>
+              <Column width={6} xSmallWidth={12}>
+                <li>React</li>
+                <li>Django</li>
+                <li>WordPress</li>
+              </Column>
+            </Grid>
+          </List>
         </Column>
       </Grid>
     </Section>

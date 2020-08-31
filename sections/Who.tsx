@@ -9,7 +9,7 @@ import photoShader from "../utils/photoShader";
 
 const Bio = styled.p`
   margin-top: 0;
-  max-width: 540px;
+  max-width: 600px;
 `;
 
 const Who = () => {
@@ -21,9 +21,9 @@ const Who = () => {
     canvas.setUniform("u_texture", "/static/scott.png");
   }, []);
   return (
-    <Section>
+    <Section blue>
       <Grid>
-        <Column width={2} medWidth={12}>
+        <Column width={12}>
           <SectionTitle>Who</SectionTitle>
         </Column>
       </Grid>
@@ -49,7 +49,7 @@ const Who = () => {
             <a href="mailto:scott@openset.tech">scott@openset.tech</a>
           </p>
         </Column>
-        <Column width={5} largeWidth={8} xSmallWidth={12}>
+        <Column width={5} largeWidth={9} xSmallWidth={12}>
           <Bio>
             Scott founded Open Set in 2020 after serving as Director of
             Technology at iStrategyLabs (ISL) in Washington, DC. Scott has

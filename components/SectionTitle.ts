@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import * as Breakpoints from "../styles/breakpoints";
+import Lede from "./Lede";
 
 const SectionTitle = styled.h3`
+  &:after {
+    content: "—";
+  }
   color: #888;
   margin-top: 0;
 
@@ -19,6 +23,10 @@ const SectionTitle = styled.h3`
 
   @media screen and (max-width: ${Breakpoints.S}px) {
     font-size: 22px;
+  }
+
+  & + ${Lede} {
+    margin-top: 0;
   }
 `;
 

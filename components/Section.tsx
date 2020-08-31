@@ -2,19 +2,29 @@ import styled from "styled-components";
 import * as Breakpoints from "../styles/breakpoints";
 import { useState, useEffect, useRef } from "react";
 import inViewport from "../utils/inViewport";
+import SectionTitle from "./SectionTitle";
 
-const StyledSection = styled.section<{ first: boolean }>`
-  padding-top: ${props => (props.first ? 0 : 120)}px;
+const StyledSection = styled.section<{ blue: boolean; first: boolean }>`
+  background: ${props => (props.blue ? "#00f" : "transparent")};
+  color: ${props => (props.blue ? "#fff" : "#424242")};
+  padding-top: ${props => (props.blue ? 120 : props.first ? 0 : 120)}px;
   padding-bottom: 120px;
-  transition: 0.8s opacity, 0.8s transform;
+
+  & > div {
+    transition: 0.8s opacity, 0.8s transform;
+  }
+
+  a {
+    color: ${props => (props.blue ? "#fff" : "#00f")};
+  }
 
   @media screen and (max-width: ${Breakpoints.L}px) {
-    padding-top: ${props => (props.first ? 0 : 100)}px;
+    padding-top: ${props => (props.blue ? 100 : props.first ? 0 : 100)}px;
     padding-bottom: 100px;
   }
 
   @media screen and (max-width: ${Breakpoints.M}px) {
-    padding-top: ${props => (props.first ? 0 : 80)}px;
+    padding-top: ${props => (props.blue ? 80 : props.first ? 0 : 80)}px;
     padding-bottom: 80px;
   }
 
@@ -31,15 +41,21 @@ const StyledSection = styled.section<{ first: boolean }>`
   }
 
   & + section {
-    padding-top: 0;
+    ${props => !props.blue && "margin-top: 0;"}
+  }
+
+  ${SectionTitle} {
+    color: ${props => (props.blue ? "#fff" : "#424242")};
   }
 `;
 
 const Section = ({
+  blue = false,
   dir = "left",
   children,
   first = false,
 }: {
+  blue?: boolean;
   dir?: "right" | "left";
   children: any;
   first?: boolean;
@@ -56,16 +72,15 @@ const Section = ({
     return () => window.removeEventListener("scroll", onScroll);
   });
   return (
-    <StyledSection
-      dir={dir}
-      first={first}
-      ref={ref}
-      style={{
-        opacity: loaded ? 1 : 0,
-        transform: `translateX(${loaded ? 0 : dir === "left" ? 40 : -40}px)`,
-      }}
-    >
-      {children}
+    <StyledSection blue={blue} dir={dir} first={first} ref={ref}>
+      <div
+        style={{
+          opacity: loaded ? 1 : 0,
+          transform: `translateX(${loaded ? 0 : dir === "left" ? 40 : -40}px)`,
+        }}
+      >
+        {children}
+      </div>
     </StyledSection>
   );
 };
