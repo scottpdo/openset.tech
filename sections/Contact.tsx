@@ -73,19 +73,18 @@ const Contact = () => {
     <div id="contact">
       <Section dir="right">
         <Grid>
-          <Column width={6} medWidth={12}>
+          <Column width={3} medWidth={12}>
             <SectionTitle>Contact</SectionTitle>
           </Column>
         </Grid>
         <Grid>
-          <Column width={3} largeWidth={5} medWidth={12}>
+          <Column width={3} medWidth={12}></Column>
+          <Column width={6} medWidth={12}>
             <Info>
               For general inquiries, email{" "}
               <a href="mailto:hello@openset.tech">hello@openset.tech</a> or fill
               out this form.
             </Info>
-          </Column>
-          <Column width={6} medWidth={12}>
             {!submitted ? (
               <form
                 action={formURL}

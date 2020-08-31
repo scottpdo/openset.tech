@@ -4,7 +4,7 @@ import styled from "styled-components";
 import GLCA from "../components/GLCA";
 
 const StyledFooter = styled.footer`
-  margin-top: 80px;
+  margin-top: 40px;
 `;
 
 const Copyright = styled.div`
