@@ -3,7 +3,7 @@ import * as Breakpoints from "../styles/breakpoints";
 import { useState, useEffect, useRef } from "react";
 import inViewport from "../utils/inViewport";
 
-const StyledSection = styled.section`
+const StyledSection = styled.section<{ first: boolean }>`
   padding-top: ${props => (props.first ? 0 : 100)}px;
   padding-bottom: 100px;
   transition: 0.8s opacity, 0.8s transform;
