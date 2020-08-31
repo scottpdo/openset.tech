@@ -14,7 +14,7 @@ import Lede from "../components/Lede";
 import { useEffect, useRef } from "react";
 import inViewport from "../utils/inViewport";
 import SectionTitle from "../components/SectionTitle";
-import { M, L } from "../styles/breakpoints";
+import { M, L, S } from "../styles/breakpoints";
 import scrollToTarget from "../utils/scrollToTarget";
 
 const tick = (agent: Agent) => {
@@ -55,9 +55,13 @@ const Container = styled.div`
     left: 0;
 
     @media screen and (max-width: ${M}px) {
-      left: -24px;
+      left: -48px;
       height: 60vw !important;
       width: 100vw !important;
+    }
+
+    @media screen and (max-width: ${S}px) {
+      left: -24px;
     }
   }
 `;
