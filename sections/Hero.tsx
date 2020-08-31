@@ -8,6 +8,7 @@ import GlslCanvas from "../lib/GlslCanvas";
 import { fadeIn, fadeInLeft } from "../styles/fade";
 import ColumnFiller from "../components/ColumnFiller";
 import scrollToTarget from "../utils/scrollToTarget";
+import GLButton from "../components/GLButton";
 
 const [width, height] = [864, 182];
 
@@ -237,15 +238,16 @@ const Hero = () => {
         <Column width={2}>
           <ColumnFiller>
             <div style={{ textAlign: "right", width: "100%" }}>
-              <a
-                href="mailto:hello@openset.tech"
+              <GLButton
+                // @ts-ignore
                 onClick={e => {
                   e.preventDefault();
                   scrollToTarget("#contact");
                 }}
+                small
               >
                 Say Hi
-              </a>
+              </GLButton>
             </div>
           </ColumnFiller>
         </Column>

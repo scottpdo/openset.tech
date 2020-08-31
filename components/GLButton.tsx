@@ -11,12 +11,12 @@ const Container = styled.canvas`
   opacity: 0.55;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ small: boolean }>`
   appearance: none;
   color: #fff;
   background: #00f;
-  font-size: 24px;
-  padding: 6px 20px;
+  font-size: ${props => (props.small ? 20 : 24)}px;
+  padding: ${props => (props.small ? "3px 10px" : "6px 20px")};
   border: 0 none;
   border-radius: 2px;
   font-family: "Yrsa", "Times New Roman", Times, serif;
@@ -70,8 +70,21 @@ const fragShader = `
     }
   `;
 
-const GLButton = props => {
-  if (typeof window === "undefined") return <Button>{props.children}</Button>;
+const GLButton = ({
+  children,
+  small = false,
+  ...props
+}: {
+  children?: any;
+  small: boolean;
+}) => {
+  if (typeof window === "undefined") {
+    return (
+      <Button small={small} {...props}>
+        {children}
+      </Button>
+    );
+  }
 
   const ref = useRef<HTMLCanvasElement>();
 
@@ -101,9 +114,9 @@ const GLButton = props => {
   }, []);
 
   return (
-    <Button style={props.style}>
+    <Button small={small} {...props}>
       <Container ref={ref} />
-      <span style={{ pointerEvents: "none" }}>{props.children}</span>
+      <span style={{ pointerEvents: "none" }}>{children}</span>
     </Button>
   );
 };
