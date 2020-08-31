@@ -5,6 +5,9 @@ import Column from "../components/Column";
 import Lede from "../components/Lede";
 import { useRef, useEffect, useState } from "react";
 import GlslCanvas from "../lib/GlslCanvas";
+import { fadeIn, fadeInLeft } from "../styles/fade";
+
+const [width, height] = [864, 182];
 
 const Branding = styled.div`
   display: flex;
@@ -34,31 +37,21 @@ const Header = styled.header`
   }
 `;
 
-const fadeInAnim = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
 const HeaderLogo = styled.img`
-  animation: 1s ${fadeInAnim};
+  animation: 1s ${fadeInLeft};
+  animation-fill-mode: both;
   margin-right: 20px;
   width: 52px;
 `;
 
 const HeaderH1 = styled.h1`
-  animation: 1s ${fadeInAnim};
-  animation-delay: 0.5s;
+  animation: 1s ${fadeInLeft};
   animation-fill-mode: both;
+  animation-delay: 0.5s;
 `;
 
 const HeaderH2 = styled.h2`
-  animation: 1s ${fadeInAnim};
+  animation: 1s ${fadeInLeft};
   animation-delay: 1s;
   animation-fill-mode: both;
 `;
@@ -69,6 +62,12 @@ const HeroLede = styled(Lede)`
   max-width: none;
   margin: 180px auto;
   text-align: center;
+
+  & > div {
+    animation: 2s ${fadeIn};
+    animation-fill-mode: both;
+    animation-delay: 0.1s;
+  }
 
   @media screen and (max-width: ${Breakpoints.XL}px) {
     margin: 135px auto;
@@ -93,6 +92,7 @@ const fragShader = `
   uniform sampler2D u_texture;
   uniform float u_width;
   uniform float u_height;
+  uniform vec2 u_mouse;
 
   vec4 WHITE = vec4(1.0);
   vec4 BLUE = vec4(0.0, 0.0, 1.0, 1.0);
@@ -128,6 +128,10 @@ const fragShader = `
             (d - b) * u.x * u.y;
   }
 
+  // float distance(vec2 a, vec2 b) {
+  //   return sqrt(pow(a.x - b.x, 2.0) + pow(a.y - b.y, 2.0));
+  // }
+
   void main() {
 
     // pixel size
@@ -143,25 +147,13 @@ const fragShader = `
     vec2 pix = vec2(nx, ny);
     vec4 color = texture2D(u_texture, pix);
 
-    // if (gl_FragCoord.x < 15. && gl_FragCoord.y < 15.) {
-    //   color = RED;
-    // }
-
     gl_FragColor = color;
   }
-`;
-
-const FadeIn = styled.span`
-  animation: 4s ${fadeInAnim};
-  animation-delay: 1s;
-  position: relative;
 `;
 
 const Hero = () => {
   const ref = useRef<HTMLSpanElement>();
   let gl = null;
-
-  const [width, height] = [864, 182];
 
   const createCanvas = (): HTMLCanvasElement => {
     const canvas = document.createElement("canvas");
@@ -176,9 +168,6 @@ const Hero = () => {
   };
 
   const populate = () => {
-    ref.current.innerHTML =
-      "<b style='color: #fff; display: inline-block;'>to explore, visualize, and analyze<br />complex&nbsp;systems</b>";
-
     const bufferCanvas = createCanvas();
 
     const style = getComputedStyle(ref.current);
@@ -248,8 +237,15 @@ const Hero = () => {
         <Column width={12}>
           <HeroLede>
             Open Set designs and&nbsp;builds&nbsp;software
-            <br />
-            <span ref={ref} style={{ display: "block" }} />
+            <div>
+              <span ref={ref} style={{ display: "block" }}>
+                <b style={{ color: "#fff", display: "inline-block" }}>
+                  to explore, visualize, and analyze
+                  <br />
+                  complex&nbsp;systems
+                </b>
+              </span>
+            </div>
           </HeroLede>
         </Column>
       </Grid>

@@ -1,6 +1,12 @@
-const inViewport = (el: React.RefObject<HTMLDivElement>): boolean => {
+const inViewport = (
+  el: React.RefObject<HTMLDivElement>,
+  threshold: number = 0
+): boolean => {
   const rect = el.current.getBoundingClientRect();
-  return rect.top + rect.height >= 0 && rect.top < window.innerHeight;
+  const h = window.innerHeight;
+  return (
+    rect.top + rect.height >= threshold * h && rect.top < (1 - threshold) * h
+  );
 };
 
 export default inViewport;

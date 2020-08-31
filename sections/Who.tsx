@@ -8,7 +8,6 @@ import { useRef, useEffect } from "react";
 import photoShader from "../utils/photoShader";
 
 const Bio = styled.p`
-  font-size: 20px;
   margin-top: 0;
   max-width: 540px;
 `;
@@ -24,13 +23,11 @@ const Who = () => {
   return (
     <Section>
       <Grid>
-        <Column width={2} largeWidth={1} medWidth={12} />
         <Column width={2} medWidth={12}>
           <SectionTitle>Who</SectionTitle>
         </Column>
       </Grid>
       <Grid>
-        <Column width={2} largeWidth={1} medWidth={12} />
         <Column width={3} largeWidth={3} medWidth={4} xSmallWidth={12}>
           <noscript>
             <img

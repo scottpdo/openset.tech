@@ -6,8 +6,9 @@ import styled from "styled-components";
 import Section from "../components/Section";
 import Lede from "../components/Lede";
 import SectionTitle from "../components/SectionTitle";
-import ColumnFiller from "../components/ColumnFiller";
-import photoShader from "../utils/photoShader";
+import { Agent, Environment, CanvasRenderer, Vector, utils } from "flocc";
+import inViewport from "../utils/inViewport";
+import { M } from "../styles/breakpoints";
 
 const TableTitle = styled.h4`
   margin: 0.5rem 0 0 0;
@@ -21,7 +22,6 @@ const List = styled.ul`
   li {
     align-items: center;
     display: flex;
-    font-size: 16px;
     line-height: 1.2;
     margin-bottom: 0.4em;
 
@@ -42,50 +42,125 @@ const P1 = styled.div`
   /* margin-bottom: 80px; */
 `;
 
+const Container = styled.div`
+  height: 500px;
+
+  @media screen and (max-width: ${M}px) {
+    height: 60vw;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @media screen and (max-width: ${M}px) {
+      right: -24px;
+      height: 60vw !important;
+      width: 100vw !important;
+    }
+  }
+`;
+
 const About = () => {
-  const ref = useRef();
+  const container = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    // @ts-ignore
-    // const canvas = new GlslCanvas(ref.current);
-    // canvas.load(photoShader);
-    // canvas.setUniform("u_texture", "/static/network.png");
+    const [width, height] = [800, 500];
+    const environment = new Environment({ width, height });
+    const renderer = new CanvasRenderer(environment, { width, height });
+    renderer.mount(container.current);
+
+    const pts: Vector[] = [];
+    while (pts.length < 35) {
+      pts.push(new Vector(utils.random(0, width), utils.random(0, height)));
+    }
+
+    const edgeThreshold = 0;
+
+    const tick = (agent: Agent) => {
+      const { x, y, dir } = agent.getData();
+
+      let pt1: Vector = null;
+      let pt2: Vector = null;
+      let d1 = Infinity;
+      let d2 = Infinity;
+
+      let alpha = 1;
+
+      if (y < edgeThreshold) {
+        alpha = y / edgeThreshold;
+      }
+      if (y > height - edgeThreshold) {
+        const value = (height - y) / edgeThreshold;
+        if (value < alpha) alpha = value;
+      }
+      if (x > width - edgeThreshold) {
+        const value = (width - x) / edgeThreshold;
+        if (value < alpha) alpha = value;
+      }
+
+      agent.set("color", `rgba(0, 0, 255, ${alpha}`);
+
+      pts.forEach(pt => {
+        const d = utils.distance(agent, pt);
+        if (d < d1) {
+          if (pt1 !== null) {
+            pt2 = pt1;
+            d2 = d1;
+          }
+          pt1 = pt;
+          d1 = d;
+        }
+      });
+
+      if (Math.abs(d1 - d2) < 1.5) return;
+
+      return {
+        x: x + 0.7 * Math.cos(dir),
+        y: y + 0.7 * Math.sin(dir),
+      };
+    };
+
+    for (let i = 0; i < 350; i++) {
+      const agent = new Agent({
+        color: "#00f",
+        x: utils.random(0, width),
+        y: utils.random(0, height),
+        dir: utils.random(0, 2 * Math.PI, true),
+        size: Math.abs(utils.gaussian(2, 1)) + 0.75,
+      });
+      agent.addRule(tick);
+      environment.addAgent(agent);
+    }
+
+    const run = () => {
+      if (inViewport(container)) environment.tick();
+      requestAnimationFrame(run);
+    };
+
+    environment.tick();
+    run();
   }, []);
 
   return (
-    <Section>
+    <Section first>
       <P1>
         <Grid>
-          <Column width={2} largeWidth={1} medWidth={12} />
-          <Column width={7} smallWidth={12}>
+          <Column width={8} smallWidth={12}>
             <SectionTitle>About</SectionTitle>
             <Lede sub>
               Our overarching goal is to make complexity approachable and
               understandable.
             </Lede>
           </Column>
-          <Column width={3} largeWidth={3} medWidth={4} smallWidth={12}>
-            <ColumnFiller>
-              <noscript>
-                <img
-                  src="/static/network.png"
-                  alt=""
-                  style={{ width: "100%" }}
-                />
-              </noscript>
-              <canvas
-                ref={ref}
-                width={400}
-                height={400}
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-            </ColumnFiller>
-          </Column>
         </Grid>
       </P1>
       <Grid>
-        <Column width={4} largeWidth={3} medWidth={2} smallWidth={12} />
-        <Column width={6} medWidth={10} smallWidth={12}>
+        <Column width={4} smallWidth={12}>
+          <Container ref={container} />
+        </Column>
+        <Column width={6} largeWidth={8} smallWidth={12}>
           <p>
             With the web as a medium, our digital products range from
             user-facing websites and apps to data visualizations to tools for
@@ -95,56 +170,55 @@ const About = () => {
             By thoughtfully designing and building software, we help people
             struggling with complex systems to make sense of them.
           </p>
+          <Grid nested>
+            <Column width={1} medWidth={12} />
+            <Column width={11} medWidth={12}>
+              <TableTitle>Specialties</TableTitle>
+              <List>
+                <Grid nested>
+                  <Column width={6} xSmallWidth={12}>
+                    <li>Full-Stack Web Development</li>
+                    <li>Interactive Data Visualization</li>
+                    <li>Agent-Based Modeling and Simulation</li>
+                  </Column>
+                  <Column width={6} xSmallWidth={12}>
+                    <li>SMS (Text Message) Driven Products</li>
+                    <li>Natural Language Processing</li>
+                  </Column>
+                </Grid>
+              </List>
+              <TableTitle>Platforms</TableTitle>
+              <List>
+                <Grid nested>
+                  <Column width={6} xSmallWidth={12}>
+                    <li>Web and Responsive/Mobile Web</li>
+                    <li>Single-Page Apps</li>
+                    <li>Serverless</li>
+                  </Column>
+                  <Column width={6} xSmallWidth={12}>
+                    <li>Desktop: OSX, Windows, Linux</li>
+                    <li>SMS</li>
+                  </Column>
+                </Grid>
+              </List>
+              <TableTitle>Technologies</TableTitle>
+              <List>
+                <Grid nested>
+                  <Column width={6} xSmallWidth={12}>
+                    <li>Next.js</li>
+                    <li>Gatsby</li>
+                    <li>Three.js</li>
+                  </Column>
+                  <Column width={6} xSmallWidth={12}>
+                    <li>React</li>
+                    <li>Django</li>
+                    <li>WordPress</li>
+                  </Column>
+                </Grid>
+              </List>
+            </Column>
+          </Grid>
         </Column>
-      </Grid>
-      <Grid>
-        <Column width={4} medWidth={2} smallWidth={12} />
-        <Column width={6} largeWidth={8} medWidth={10} smallWidth={10}>
-          <TableTitle>Specialties</TableTitle>
-          <List>
-            <Grid nested>
-              <Column width={6} xSmallWidth={12}>
-                <li>Full-Stack Web Development</li>
-                <li>Interactive Data Visualization</li>
-                <li>Agent-Based Modeling and Simulation</li>
-              </Column>
-              <Column width={6} xSmallWidth={12}>
-                <li>SMS (Text Message) Driven Products</li>
-                <li>Natural Language Processing</li>
-              </Column>
-            </Grid>
-          </List>
-          <TableTitle>Platforms</TableTitle>
-          <List>
-            <Grid nested>
-              <Column width={6} xSmallWidth={12}>
-                <li>Web and Responsive/Mobile Web</li>
-                <li>Single-Page Apps</li>
-                <li>Serverless</li>
-              </Column>
-              <Column width={6} xSmallWidth={12}>
-                <li>Desktop: OSX, Windows, Linux</li>
-                <li>SMS</li>
-              </Column>
-            </Grid>
-          </List>
-          <TableTitle>Technologies</TableTitle>
-          <List>
-            <Grid nested>
-              <Column width={6} xSmallWidth={12}>
-                <li>Next.js</li>
-                <li>Gatsby</li>
-                <li>Three.js</li>
-              </Column>
-              <Column width={6} xSmallWidth={12}>
-                <li>React</li>
-                <li>Django</li>
-                <li>WordPress</li>
-              </Column>
-            </Grid>
-          </List>
-        </Column>
-        <Column width={2} />
       </Grid>
     </Section>
   );

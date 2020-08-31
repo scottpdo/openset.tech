@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import {
   Environment,
   Agent,
@@ -13,6 +14,7 @@ import Lede from "../components/Lede";
 import { useEffect, useRef } from "react";
 import inViewport from "../utils/inViewport";
 import SectionTitle from "../components/SectionTitle";
+import { M, L } from "../styles/breakpoints";
 
 const tick = (agent: Agent) => {
   const dir = new Vector(agent.get("vx"), agent.get("vy"));
@@ -39,11 +41,31 @@ const tick = (agent: Agent) => {
   agent.set("vy", dir.y);
 };
 
+const Container = styled.div`
+  height: 500px;
+
+  @media screen and (max-width: ${M}px) {
+    height: 60vw;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    @media screen and (max-width: ${M}px) {
+      left: -24px;
+      height: 60vw !important;
+      width: 100vw !important;
+    }
+  }
+`;
+
 const Work = () => {
   const container = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    const [width, height] = [window.innerWidth, 400];
+    const [width, height] = [800, 500];
     const environment = new Environment({ width, height });
     const renderer = new CanvasRenderer(environment, { width, height });
     renderer.mount(container.current);
@@ -89,6 +111,7 @@ const Work = () => {
       requestAnimationFrame(run);
     };
 
+    environment.tick();
     run();
 
     container.current.addEventListener("mousemove", onMouseMove);
@@ -99,28 +122,40 @@ const Work = () => {
   }, []);
 
   return (
-    <Section>
+    <Section dir="right">
       <Grid>
-        <Column width={2} largeWidth={1} medWidth={12} />
         <Column width={8} medWidth={12}>
           <SectionTitle>Work</SectionTitle>
           <Lede sub>
-            Our flagship product, <a href="https://flocc.network">Flocc</a>, is
-            an open-source JavaScript library for agent-based modeling.
+            Our flagship product,{" "}
+            <a href="https://flocc.network" target="_blank">
+              Flocc
+            </a>
+            , is an open-source JavaScript library for agent-based modeling.
           </Lede>
         </Column>
       </Grid>
       <Grid>
-        <Column width={2} largeWidth={1} medWidth={12} />
-        <Column width={4} largeWidth={5} medWidth={12}>
+        <Column width={6} smallWidth={12}>
           <p>
-            We’ve also built products for the City of San José, Accion
-            International, Books@Work, and other organizations.
+            We’ve also built products for the{" "}
+            <a href="https://www.sanjoseca.gov/" target="_blank">
+              City of San José
+            </a>
+            ,{" "}
+            <a href="https://www.accion.org" target="_blank">
+              Accion International
+            </a>
+            ,{" "}
+            <a href="https://www.booksatwork.org" target="_blank">
+              Books@Work
+            </a>
+            , and other organizations.
           </p>
           <p>If you’re interested in learning more, get in touch.</p>
         </Column>
-        <Column width={6}>
-          <div ref={container} />
+        <Column width={6} smallWidth={12}>
+          <Container ref={container} />
         </Column>
       </Grid>
     </Section>

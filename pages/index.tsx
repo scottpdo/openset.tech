@@ -28,17 +28,11 @@ const Index = () => {
   return (
     <>
       <Wrapper>
-        {/* <GLCA direction="down" height={21} /> */}
         <Hero />
-        {/* <GLSwarm direction="left" height={42} /> */}
         <About />
-        {/* <GLCA direction="left" height={42} /> */}
         <Work />
-        {/* <GLCA direction="left" height={42} /> */}
         <Who />
-        {/* <GLCA direction="left" height={42} /> */}
         <Contact />
-        {/* <GLCA direction="up" height={21} /> */}
       </Wrapper>
     </>
   );

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import * as Breakpoints from "../styles/breakpoints";
 
 const SectionTitle = styled.h3`
+  color: #888;
   margin-top: 0;
 
   @media screen and (max-width: ${Breakpoints.XL}px) {

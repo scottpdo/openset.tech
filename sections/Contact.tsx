@@ -95,15 +95,13 @@ const Contact = () => {
   const formURL =
     "https://script.google.com/macros/s/AKfycbxcJUO7z9UW0MG30WtR2GvdGVeTIqNi7Mged52e-VTlNmf6luBx/exec";
   return (
-    <Section>
+    <Section dir="right">
       <Grid>
-        <Column width={2} largeWidth={1} medWidth={12} />
-        <Column width={4} largeWidth={5} medWidth={12}>
+        <Column width={6} medWidth={12}>
           <SectionTitle>Contact</SectionTitle>
         </Column>
       </Grid>
       <Grid>
-        <Column width={2} largeWidth={1} medWidth={12} />
         <Column width={3} largeWidth={5} medWidth={12}>
           <Info>
             For general inquiries, email{" "}
