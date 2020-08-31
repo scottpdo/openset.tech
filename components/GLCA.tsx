@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Column from "./Column";
 import Grid from "./Grid";
 
-const scale = 2;
+const scale = 1;
 
 const Container = styled.canvas`
   position: absolute;
@@ -70,7 +70,7 @@ const fragShader = (direction: "up" | "down" | "left" | "right") => {
       float speed = 1.0;
 
       float mightChange = pow(noise(vec2(
-        nx / (u_width / 10.0) + cos(u_time) * speed, 
+        nx / (u_width / 6.0) + cos(u_time) * speed, 
         ny / (u_height) + sin(u_time) * speed
       )), 2.0);
 
