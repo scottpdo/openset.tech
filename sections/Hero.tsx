@@ -6,6 +6,8 @@ import Lede from "../components/Lede";
 import { useRef, useEffect, useState } from "react";
 import GlslCanvas from "../lib/GlslCanvas";
 import { fadeIn, fadeInLeft } from "../styles/fade";
+import ColumnFiller from "../components/ColumnFiller";
+import scrollToTarget from "../utils/scrollToTarget";
 
 const [width, height] = [864, 182];
 
@@ -223,7 +225,7 @@ const Hero = () => {
   return (
     <Header>
       <Grid>
-        <Column width={12}>
+        <Column width={10}>
           <Branding>
             <HeaderLogo src="/static/logo.png" alt="" />
             <div>
@@ -231,6 +233,21 @@ const Hero = () => {
               <HeaderH2>Software Design + Research</HeaderH2>
             </div>
           </Branding>
+        </Column>
+        <Column width={2}>
+          <ColumnFiller>
+            <div style={{ textAlign: "right", width: "100%" }}>
+              <a
+                href="mailto:hello@openset.tech"
+                onClick={e => {
+                  e.preventDefault();
+                  scrollToTarget("#contact");
+                }}
+              >
+                Say Hi
+              </a>
+            </div>
+          </ColumnFiller>
         </Column>
       </Grid>
       <Grid>

@@ -10,6 +10,7 @@ import Hero from "../sections/Hero";
 import { useEffect } from "react";
 import GLCA from "../components/GLCA";
 import GLSwarm from "../components/GLSwarm";
+import Footer from "../sections/Footer";
 
 const Index = () => {
   const onMouseMove = (e: MouseEvent) => {
@@ -33,6 +34,7 @@ const Index = () => {
         <Work />
         <Who />
         <Contact />
+        <Footer />
       </Wrapper>
     </>
   );

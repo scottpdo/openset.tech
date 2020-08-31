@@ -15,6 +15,7 @@ import { useEffect, useRef } from "react";
 import inViewport from "../utils/inViewport";
 import SectionTitle from "../components/SectionTitle";
 import { M, L } from "../styles/breakpoints";
+import scrollToTarget from "../utils/scrollToTarget";
 
 const tick = (agent: Agent) => {
   const dir = new Vector(agent.get("vx"), agent.get("vy"));
@@ -152,7 +153,18 @@ const Work = () => {
             </a>
             , and other organizations.
           </p>
-          <p>If you’re interested in learning more, get in touch.</p>
+          <p>
+            If you’re interested in learning more,{" "}
+            <a
+              href="#contact"
+              onClick={e => {
+                e.preventDefault();
+                scrollToTarget("#contact");
+              }}
+            >
+              get in touch.
+            </a>
+          </p>
         </Column>
         <Column width={6} smallWidth={12}>
           <Container ref={container} />

@@ -95,79 +95,81 @@ const Contact = () => {
   const formURL =
     "https://script.google.com/macros/s/AKfycbxcJUO7z9UW0MG30WtR2GvdGVeTIqNi7Mged52e-VTlNmf6luBx/exec";
   return (
-    <Section dir="right">
-      <Grid>
-        <Column width={6} medWidth={12}>
-          <SectionTitle>Contact</SectionTitle>
-        </Column>
-      </Grid>
-      <Grid>
-        <Column width={3} largeWidth={5} medWidth={12}>
-          <Info>
-            For general inquiries, email{" "}
-            <a href="mailto:hello@openset.tech">hello@openset.tech</a> or fill
-            out this form.
-          </Info>
-        </Column>
-        <Column width={6} medWidth={12}>
-          {!submitted ? (
-            <form
-              action={formURL}
-              method="POST"
-              ref={form}
-              onSubmit={e => {
-                e.preventDefault();
-                const body = new FormData();
-                const elements = Array.from(form.current.elements);
-                elements.forEach((el: HTMLInputElement) => {
-                  if (el.name && el.value) {
-                    body.append(el.name, el.value);
-                  }
-                });
-                fetch(formURL, {
-                  method: "POST",
-                  body,
-                });
-                setSubmitted(true);
-              }}
-            >
-              <Label htmlFor="name">
-                <Input
-                  name="name"
-                  id="name"
-                  type="text"
-                  required
-                  placeholder=" "
-                />
-                <span>Name</span>
-              </Label>
-              <Label htmlFor="email">
-                <Input
-                  name="email"
-                  id="email"
-                  type="email"
-                  required
-                  placeholder=" "
-                />
-                <span>Email</span>
-              </Label>
-              <Label htmlFor="message">
-                <Input
-                  as="textarea"
-                  name="message"
-                  id="message"
-                  placeholder=" "
-                />
-                <span>Message</span>
-              </Label>
-              <Button>Send</Button>
-            </form>
-          ) : (
-            "Thanks for getting in touch."
-          )}
-        </Column>
-      </Grid>
-    </Section>
+    <div id="contact">
+      <Section dir="right">
+        <Grid>
+          <Column width={6} medWidth={12}>
+            <SectionTitle>Contact</SectionTitle>
+          </Column>
+        </Grid>
+        <Grid>
+          <Column width={3} largeWidth={5} medWidth={12}>
+            <Info>
+              For general inquiries, email{" "}
+              <a href="mailto:hello@openset.tech">hello@openset.tech</a> or fill
+              out this form.
+            </Info>
+          </Column>
+          <Column width={6} medWidth={12}>
+            {!submitted ? (
+              <form
+                action={formURL}
+                method="POST"
+                ref={form}
+                onSubmit={e => {
+                  e.preventDefault();
+                  const body = new FormData();
+                  const elements = Array.from(form.current.elements);
+                  elements.forEach((el: HTMLInputElement) => {
+                    if (el.name && el.value) {
+                      body.append(el.name, el.value);
+                    }
+                  });
+                  fetch(formURL, {
+                    method: "POST",
+                    body,
+                  });
+                  setSubmitted(true);
+                }}
+              >
+                <Label htmlFor="name">
+                  <Input
+                    name="name"
+                    id="name"
+                    type="text"
+                    required
+                    placeholder=" "
+                  />
+                  <span>Name</span>
+                </Label>
+                <Label htmlFor="email">
+                  <Input
+                    name="email"
+                    id="email"
+                    type="email"
+                    required
+                    placeholder=" "
+                  />
+                  <span>Email</span>
+                </Label>
+                <Label htmlFor="message">
+                  <Input
+                    as="textarea"
+                    name="message"
+                    id="message"
+                    placeholder=" "
+                  />
+                  <span>Message</span>
+                </Label>
+                <Button>Send</Button>
+              </form>
+            ) : (
+              "Thanks for getting in touch."
+            )}
+          </Column>
+        </Grid>
+      </Section>
+    </div>
   );
 };
 
