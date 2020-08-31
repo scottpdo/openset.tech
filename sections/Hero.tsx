@@ -69,7 +69,7 @@ const HeroLede = styled(Lede)`
   & > div {
     animation: 2s ${fadeIn};
     animation-fill-mode: both;
-    animation-delay: 0.1s;
+    animation-delay: 0.333s;
   }
 
   @media screen and (max-width: ${Breakpoints.XL}px) {
