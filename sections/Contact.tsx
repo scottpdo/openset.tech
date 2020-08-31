@@ -4,6 +4,7 @@ import Section from "../components/Section";
 import SectionTitle from "../components/SectionTitle";
 import styled from "styled-components";
 import { useState, useRef } from "react";
+import GLButton from "../components/GLButton";
 
 const Label = styled.label`
   display: block;
@@ -57,32 +58,6 @@ const Button = styled.button`
   font-family: "Yrsa", "Times New Roman", Times, serif;
   float: right;
   cursor: pointer;
-
-  &:after {
-    /* content: "";
-    display: block;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    border: 1px solid #00f;
-    z-index: -1;
-    transform: translate3d(6px, 5px, 0);
-    top: 0;
-    left: 0;
-    transition: 0.3s transform; */
-  }
-
-  &:hover {
-    &:after {
-      transform: translate3d(10px, 9px, 0);
-    }
-  }
-
-  &:active {
-    &:after {
-      transform: translate3d(0, 0, 0);
-    }
-  }
 `;
 
 const Info = styled.p`
@@ -161,7 +136,7 @@ const Contact = () => {
                   />
                   <span>Message</span>
                 </Label>
-                <Button>Send</Button>
+                <GLButton style={{ float: "right" }}>Send</GLButton>
               </form>
             ) : (
               "Thanks for getting in touch."

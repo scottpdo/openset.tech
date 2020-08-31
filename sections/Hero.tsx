@@ -252,8 +252,8 @@ const Hero = () => {
       </Grid>
       <Grid>
         <Column width={12}>
-          <HeroLede>
-            Open Set designs and&nbsp;builds&nbsp;software
+          <HeroLede as="div">
+            Open Set designs and&nbsp;builds&nbsp;software{" "}
             <div>
               <span ref={ref} style={{ display: "block" }}>
                 <b style={{ color: "#fff", display: "inline-block" }}>

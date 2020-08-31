@@ -38,16 +38,11 @@ const tick = (agent: Agent) => {
 
   dir.add(step);
   dir.multiplyScalar(dir.length() > 1 ? 0.97 : 1.03);
-  agent.set("vx", dir.x);
-  agent.set("vy", dir.y);
+  return { vx: dir.x, vy: dir.y };
 };
 
 const Container = styled.div`
-  height: 500px;
-
-  @media screen and (max-width: ${M}px) {
-    height: 60vw;
-  }
+  height: 400px;
 
   canvas {
     position: absolute;
@@ -56,8 +51,6 @@ const Container = styled.div`
 
     @media screen and (max-width: ${M}px) {
       left: -48px;
-      height: 60vw !important;
-      width: 100vw !important;
     }
 
     @media screen and (max-width: ${S}px) {
@@ -70,12 +63,12 @@ const Work = () => {
   const container = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    const [width, height] = [800, 500];
+    const [width, height] = [800, 400];
     const environment = new Environment({ width, height });
     const renderer = new CanvasRenderer(environment, { width, height });
     renderer.mount(container.current);
 
-    for (let i = 0; i < width / 10; i++) {
+    for (let i = 0; i < 100; i++) {
       const agent = new Agent();
       const angle = 2 * Math.PI * Math.random();
       const dir = new Vector(Math.cos(angle), Math.sin(angle));
@@ -86,7 +79,7 @@ const Work = () => {
       agent.set("y", Math.random() * height);
       agent.set("color", `rgb(0, 0, ${utils.random(0, 255)})`);
       agent.set("shape", "arrow");
-      agent.set("size", Math.random() * 3 + 2);
+      agent.set("size", Math.random() * 3 + 1);
       agent.addRule(tick);
       environment.addAgent(agent);
     }

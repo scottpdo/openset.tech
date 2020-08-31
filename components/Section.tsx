@@ -4,11 +4,16 @@ import { useState, useEffect, useRef } from "react";
 import inViewport from "../utils/inViewport";
 
 const StyledSection = styled.section<{ first: boolean }>`
-  padding-top: ${props => (props.first ? 0 : 100)}px;
-  padding-bottom: 100px;
+  padding-top: ${props => (props.first ? 0 : 120)}px;
+  padding-bottom: 120px;
   transition: 0.8s opacity, 0.8s transform;
 
   @media screen and (max-width: ${Breakpoints.L}px) {
+    padding-top: ${props => (props.first ? 0 : 100)}px;
+    padding-bottom: 100px;
+  }
+
+  @media screen and (max-width: ${Breakpoints.M}px) {
     padding-top: ${props => (props.first ? 0 : 80)}px;
     padding-bottom: 80px;
   }

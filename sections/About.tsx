@@ -1,12 +1,18 @@
 import { useEffect, useRef } from "react";
-import GlslCanvas from "../lib/GlslCanvas";
 import Grid from "../components/Grid";
 import Column from "../components/Column";
 import styled from "styled-components";
 import Section from "../components/Section";
 import Lede from "../components/Lede";
 import SectionTitle from "../components/SectionTitle";
-import { Agent, Environment, CanvasRenderer, Vector, utils } from "flocc";
+import {
+  Agent,
+  Environment,
+  KDTree,
+  CanvasRenderer,
+  Vector,
+  utils,
+} from "flocc";
 import inViewport from "../utils/inViewport";
 import { M } from "../styles/breakpoints";
 
@@ -45,10 +51,6 @@ const P1 = styled.div`
 const Container = styled.div`
   height: 500px;
 
-  @media screen and (max-width: ${M}px) {
-    height: 60vw;
-  }
-
   canvas {
     position: absolute;
     top: 0;
@@ -56,8 +58,6 @@ const Container = styled.div`
 
     @media screen and (max-width: ${M}px) {
       right: -24px;
-      height: 60vw !important;
-      width: 100vw !important;
     }
   }
 `;
@@ -67,7 +67,7 @@ const About = () => {
 
   useEffect(() => {
     const [width, height] = [800, 500];
-    const environment = new Environment({ width, height });
+    let environment = new Environment({ width, height, torus: true });
     const renderer = new CanvasRenderer(environment, { width, height });
     renderer.mount(container.current);
 
@@ -79,10 +79,11 @@ const About = () => {
     const edgeThreshold = 0;
 
     const tick = (agent: Agent) => {
-      const { x, y, dir } = agent.getData();
+      const { x, y, vx, vy } = agent.getData();
+      const dir = new Vector(agent.get("vx"), agent.get("vy"));
 
-      let pt1: Vector = null;
-      let pt2: Vector = null;
+      let pt1: Vector = agent.get("p1");
+      let pt2: Vector = agent.get("p2");
       let d1 = Infinity;
       let d2 = Infinity;
 
@@ -114,33 +115,70 @@ const About = () => {
         }
       });
 
-      if (Math.abs(d1 - d2) < 1.5) return;
+      if (Math.abs(d1 - d2) < 3) return;
+
+      dir.multiplyScalar(dir.length() > 1 ? 0.97 : 1.03);
 
       return {
-        x: x + 0.7 * Math.cos(dir),
-        y: y + 0.7 * Math.sin(dir),
+        x: x + 0.7 * dir.x,
+        y: y + 0.7 * dir.y,
+        vx: dir.x,
+        vy: dir.y,
       };
     };
 
-    for (let i = 0; i < 350; i++) {
+    for (let i = 0; i < 400; i++) {
+      const dir = utils.random(0, 2 * Math.PI, true);
       const agent = new Agent({
         color: "#00f",
         x: utils.random(0, width),
         y: utils.random(0, height),
-        dir: utils.random(0, 2 * Math.PI, true),
+        vx: Math.cos(dir),
+        vy: Math.sin(dir),
         size: Math.abs(utils.gaussian(2, 1)) + 0.75,
       });
       agent.addRule(tick);
       environment.addAgent(agent);
     }
+    const kdtree = new KDTree(environment.getAgents(), 2);
+    environment.use(kdtree);
+
+    const onMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY, movementX, movementY } = e;
+
+      const rect = container.current
+        .querySelector("canvas")
+        .getBoundingClientRect();
+
+      const mouse = {
+        x: clientX - rect.left,
+        y: clientY - rect.top,
+      };
+
+      kdtree.agentsWithinDistance(mouse, 100).forEach(agent => {
+        const d = utils.distance(mouse, agent);
+        const inverseDistance = Math.min(0.1, 1 / d);
+        agent.increment("vx", movementX * inverseDistance);
+        agent.increment("vy", movementY * inverseDistance);
+        agent.set("x", agent.get("x") + 20 * inverseDistance * movementX);
+        agent.set("y", agent.get("y") + 20 * inverseDistance * movementY);
+      });
+    };
 
     const run = () => {
       if (inViewport(container)) environment.tick();
       requestAnimationFrame(run);
     };
 
+    container.current.addEventListener("mousemove", onMouseMove);
+
     environment.tick();
     run();
+
+    return () => {
+      container.current.removeEventListener("mousemove", onMouseMove);
+      environment = null;
+    };
   }, []);
 
   return (

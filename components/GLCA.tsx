@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Column from "./Column";
 import Grid from "./Grid";
 
-const scale = 5;
+const scale = 2;
 
 const Container = styled.canvas`
   position: absolute;
@@ -92,7 +92,7 @@ const fragShader = (direction: "up" | "down" | "left" | "right") => {
       }
       ${
         direction === "up"
-          ? `if (r < pow((ny - 1.0) / u_height, 0.5)) color = WHITE;`
+          ? `if (r < pow((ny - 1.0) / u_height, 1.0)) color = WHITE;`
           : ""
       }
       ${

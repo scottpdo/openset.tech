@@ -4,12 +4,12 @@ import styled from "styled-components";
 import GLCA from "../components/GLCA";
 
 const StyledFooter = styled.footer`
-  margin-top: 20px;
+  /* margin-top: 0; */
 `;
 
 const Copyright = styled.div`
   text-align: center;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 `;
 
 const Footer = () => {
@@ -20,7 +20,7 @@ const Footer = () => {
           <Copyright>&copy; {new Date().getFullYear()} Open Set</Copyright>
         </Column>
       </Grid>
-      <GLCA height={20} direction="up" />
+      <GLCA height={60} direction="up" />
     </StyledFooter>
   );
 };
