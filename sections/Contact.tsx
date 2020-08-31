@@ -136,6 +136,7 @@ const Contact = () => {
                   />
                   <span>Message</span>
                 </Label>
+                {/* @ts-ignore */}
                 <GLButton style={{ float: "right" }}>Send</GLButton>
               </form>
             ) : (
