@@ -34,6 +34,10 @@ const Wrapper = ({ children }) => {
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-176828735-1"
         ></script>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        ></meta>
       </Head>
       <Sanitize />
       <Global />
