@@ -2,7 +2,7 @@ import Grid from "../components/Grid";
 import Column from "../components/Column";
 import Section from "../components/Section";
 import SectionTitle from "../components/SectionTitle";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useState, useRef } from "react";
 import GLButton from "../components/GLButton";
 
@@ -47,21 +47,32 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.button`
-  appearance: none;
-  color: #fff;
-  background: #00f;
-  font-size: 24px;
-  padding: 6px 20px;
-  border: 0 none;
-  border-radius: 2px;
-  font-family: "Yrsa", "Times New Roman", Times, serif;
-  float: right;
-  cursor: pointer;
-`;
-
 const Info = styled.p`
   margin-top: 0;
+`;
+
+const StyledForm = styled.form`
+  transition: 0.3s opacity;
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const Thanks = styled.h3`
+  animation: 0.5s ${fadeIn};
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  left: 0;
+  text-align: center;
 `;
 
 const Contact = () => {
@@ -85,11 +96,12 @@ const Contact = () => {
               <a href="mailto:hello@openset.tech">hello@openset.tech</a> or fill
               out this form.
             </Info>
-            {!submitted ? (
-              <form
+            <div>
+              <StyledForm
                 action={formURL}
                 method="POST"
                 ref={form}
+                style={{ opacity: submitted ? 0 : 1 }}
                 onSubmit={e => {
                   e.preventDefault();
                   const body = new FormData();
@@ -137,10 +149,13 @@ const Contact = () => {
                 </Label>
                 {/* @ts-ignore */}
                 <GLButton style={{ float: "right" }}>Send</GLButton>
-              </form>
-            ) : (
-              "Thanks for getting in touch."
-            )}
+              </StyledForm>
+              {submitted && (
+                <Thanks>
+                  Thanks for your inquiry. We'll be in touch with you soon!
+                </Thanks>
+              )}
+            </div>
           </Column>
         </Grid>
       </Section>
