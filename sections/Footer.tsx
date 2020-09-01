@@ -24,7 +24,7 @@ const Footer = () => {
           </Copyright>
         </Column>
       </Grid>
-      <GLCA height={50} direction="up" />
+      <GLCA height={50} />
     </StyledFooter>
   );
 };
