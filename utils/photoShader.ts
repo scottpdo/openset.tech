@@ -1,6 +1,6 @@
 const photoShader = `
   #ifdef GL_ES
-  precision mediump float;
+  precision highp float;
   #endif
 
   float random(float x) {
