@@ -49,7 +49,7 @@ const Who = () => {
             <a href="mailto:scott@openset.tech">scott@openset.tech</a>
           </p>
         </Column>
-        <Column width={5} largeWidth={9} xSmallWidth={12}>
+        <Column width={5} largeWidth={9} medWidth={8} xSmallWidth={12}>
           <Bio>
             Scott founded Open Set in 2020 after serving as Director of
             Technology at iStrategyLabs (ISL) in Washington, DC. Scott has

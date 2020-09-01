@@ -7,8 +7,9 @@ const Container = styled.canvas`
   top: 0;
   left: 0;
   transform-origin: 0 0;
-  transform: scale(0.5);
-  opacity: 0.55;
+  transform: translateY(-100%) scale(0.5);
+  opacity: 0;
+  transition: 0.5s transform, 0.5s opacity;
 `;
 
 const Button = styled.button<{ small: boolean }>`
@@ -23,6 +24,11 @@ const Button = styled.button<{ small: boolean }>`
   font-family: "Yrsa", "Times New Roman", Times, serif;
   cursor: pointer;
   overflow: hidden;
+
+  &:active ${Container}, &:hover ${Container} {
+    opacity: 0.35;
+    transform: translateY(0) scale(0.5);
+  }
 `;
 
 const fragShader = `
@@ -55,7 +61,7 @@ const fragShader = `
     void main() {
       float scale = 2.0;
       float nx = floor(gl_FragCoord.x / scale);
-      float nxt = floor(gl_FragCoord.x / scale) - u_time / 100.0;
+      float nxt = floor(gl_FragCoord.x / scale) + sin(u_time);
       float ny = floor(gl_FragCoord.y / scale);
       vec2 st = vec2(nx, ny);
 
@@ -64,8 +70,10 @@ const fragShader = `
       float r = random2(st);
       float dist = distance((u_mouse * 2.0 + vec2(0.0, -u_height)) / scale, vec2(nx, ny)) / 6.0;
 
-      vec4 color = fract(dist - u_time) > 0.5 ? WHITE : TRANSPARENT;
-      if (u_mouse.x == 0.0 && u_mouse.y == 0.0) color = TRANSPARENT;
+      // vec4 color = fract(dist - u_time) > 0.5 ? WHITE : TRANSPARENT;
+      // if (u_mouse.x == 0.0 && u_mouse.y == 0.0) color = TRANSPARENT;
+
+      vec4 color = fract((nx + 2.0 * sin(0.3 * ny + u_time * 20.0)) / 8.0) > 0.5 ? WHITE : TRANSPARENT;
 
       gl_FragColor = color;
     }

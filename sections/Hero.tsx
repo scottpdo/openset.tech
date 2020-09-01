@@ -94,6 +94,17 @@ const HeroLedeSmallScreen = styled(HeroLede)`
   }
 `;
 
+const HeroButton = styled.div`
+  animation: 1s ${fadeInLeft};
+  animation-fill-mode: both;
+  animation-delay: 5.5s;
+  text-align: right;
+  width: 100%;
+  @media screen and (max-width: ${Breakpoints.M}px) {
+    display: none;
+  }
+`;
+
 const fragShader = `
   #ifdef GL_ES
   precision mediump float;
@@ -246,7 +257,7 @@ const Hero = () => {
         </Column>
         <Column width={2}>
           <ColumnFiller>
-            <div style={{ textAlign: "right", width: "100%" }}>
+            <HeroButton>
               <GLButton
                 // @ts-ignore
                 onClick={e => {
@@ -257,7 +268,7 @@ const Hero = () => {
               >
                 Say Hi
               </GLButton>
-            </div>
+            </HeroButton>
           </ColumnFiller>
         </Column>
       </Grid>
