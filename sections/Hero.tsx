@@ -246,7 +246,7 @@ const Hero = () => {
   return (
     <Header>
       <Grid>
-        <Column width={10}>
+        <Column width={9} smallWidth={12}>
           <Branding>
             <HeaderLogo src="/static/logo.png" alt="" />
             <div>
@@ -255,7 +255,7 @@ const Hero = () => {
             </div>
           </Branding>
         </Column>
-        <Column width={2}>
+        <Column width={3}>
           <ColumnFiller>
             <HeroButton>
               <GLButton

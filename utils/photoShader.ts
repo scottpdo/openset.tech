@@ -41,7 +41,7 @@ const photoShader = `
   vec4 BLUE = vec4(0.0, 0.0, 1.0, 1.0);
 
   void main() {
-    float scale = 5.0 + 35.0 * (sin(u_time) + 1.0);
+    float scale = 15.0 + 30.0 * (sin(u_time / 2.0) + 1.0);
     vec2 st = (gl_FragCoord.xy + vec2(0.5)) / u_resolution.xy;
     vec2 pix = floor(scale * st) / scale;
     float noiseValue = noise(vec2(pix.x + sin(u_time), pix.y - cos(u_time)));
