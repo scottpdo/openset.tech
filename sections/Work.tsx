@@ -44,6 +44,10 @@ const tick = (agent: Agent) => {
 const Container = styled.div`
   height: 400px;
 
+  @media screen and (max-width: ${M}px) {
+    overflow: hidden;
+  }
+
   canvas {
     position: absolute;
     top: 0;

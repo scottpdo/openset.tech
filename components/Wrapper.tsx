@@ -38,6 +38,11 @@ const Wrapper = ({ children }) => {
           name="viewport"
           content="width=device-width, initial-scale=1"
         ></meta>
+        <meta
+          name="description"
+          content="Open Set designs and builds software to explore, visualize, and analyze complex systems."
+        />
+        <meta name="og:image" content="" />
       </Head>
       <Sanitize />
       <Global />

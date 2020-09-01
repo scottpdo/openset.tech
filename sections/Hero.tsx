@@ -196,7 +196,8 @@ const Hero = () => {
     const style = getComputedStyle(ref.current);
     const buffer = bufferCanvas.getContext("2d");
     const fontSize = 131;
-    buffer.font = `bold ${fontSize}px ${style.fontFamily}`;
+    // hard-coded because getComputedStyle doesn't seem to work on iPad???
+    buffer.font = `bold ${fontSize}px Yrsa`;
     buffer.fillStyle = "#00f";
     buffer.textAlign = "center";
     buffer.textBaseline = "hanging";
