@@ -25,6 +25,7 @@ const Wrapper = ({ children }) => {
     <StyledWrapper>
       <Head>
         <title>Open Set</title>
+        <meta name="og:title" content="Open Set" />
         <link rel="shortcut icon" href="/static/openset-favicon.png" />
         <link
           href="https://fonts.googleapis.com/css2?family=Yrsa:wght@300;400;500;600;700&display=swap"
@@ -40,6 +41,10 @@ const Wrapper = ({ children }) => {
         ></meta>
         <meta
           name="description"
+          content="Open Set designs and builds software to explore, visualize, and analyze complex systems."
+        />
+        <meta
+          name="og:description"
           content="Open Set designs and builds software to explore, visualize, and analyze complex systems."
         />
         <meta name="og:image" content="/static/og.png" />
