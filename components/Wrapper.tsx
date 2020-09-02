@@ -43,6 +43,7 @@ const Wrapper = ({ children }) => {
           content="Open Set designs and builds software to explore, visualize, and analyze complex systems."
         />
         <meta name="og:image" content="/static/og.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Sanitize />
       <Global />
