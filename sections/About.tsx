@@ -188,7 +188,7 @@ const About = () => {
     <Section blue first>
       <P1>
         <Grid>
-          <Column width={10} smallWidth={12}>
+          <Column width={10} medWidth={12}>
             <SectionTitle>About</SectionTitle>
             <Lede sub>
               Our overarching goal is to make complexity approachable and

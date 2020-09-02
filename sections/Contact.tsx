@@ -5,6 +5,7 @@ import SectionTitle from "../components/SectionTitle";
 import styled, { keyframes } from "styled-components";
 import { useState, useRef } from "react";
 import GLButton from "../components/GLButton";
+import * as Breakpoints from "../styles/breakpoints";
 
 const Label = styled.label`
   display: block;
@@ -49,6 +50,10 @@ const Input = styled.input`
 
 const Info = styled.p`
   margin-top: 0;
+  max-width: 420px;
+  @media screen and (max-width: ${Breakpoints.M}px) {
+    max-width: none;
+  }
 `;
 
 const StyledForm = styled.form`
@@ -84,18 +89,19 @@ const Contact = () => {
     <div id="contact">
       <Section dir="right">
         <Grid>
-          <Column width={3} medWidth={12}>
+          <Column width={4} medWidth={12}>
             <SectionTitle>Contact</SectionTitle>
           </Column>
         </Grid>
         <Grid>
-          <Column width={3} medWidth={12}></Column>
-          <Column width={6} medWidth={12}>
+          <Column width={4} medWidth={12}>
             <Info>
               For general inquiries, email{" "}
               <a href="mailto:hello@openset.tech">hello@openset.tech</a> or fill
               out this form.
             </Info>
+          </Column>
+          <Column width={6} medWidth={12}>
             <div>
               <StyledForm
                 action={formURL}
