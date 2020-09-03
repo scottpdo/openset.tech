@@ -24,6 +24,10 @@ const StyledSection = styled.section<{ blue: boolean; first: boolean }>`
     @media screen and (max-width: ${Breakpoints.S}px) {
       display: none;
     }
+
+    @media screen and (min-width: ${Breakpoints.XL}px) {
+      width: 40px;
+    }
   }
 
   &:after {

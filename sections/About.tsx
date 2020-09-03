@@ -67,11 +67,8 @@ const About = () => {
   const container = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    const width = 1000;
-    const height = Math.max(
-      container.current.parentElement.getBoundingClientRect().height | 0,
-      400
-    );
+    const width = 800;
+    const height = 400;
     let environment = new Environment({ width, height, torus: true });
     const renderer = new CanvasRenderer(environment, { width, height });
     renderer.mount(container.current);
@@ -200,10 +197,10 @@ const About = () => {
         </Grid>
       </P1>
       <Grid>
-        <Column width={6} smallWidth={12}>
+        <Column width={4} smallWidth={12}>
           <Container ref={container} />
         </Column>
-        <Column width={6} smallWidth={12}>
+        <Column width={6} largeWidth={7} medWidth={8} smallWidth={12}>
           <p>
             With the web as a medium, our digital products range from
             user-facing websites and apps to data visualizations to tools for

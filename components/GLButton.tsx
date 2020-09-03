@@ -16,7 +16,7 @@ const Button = styled.button<{ small: boolean }>`
   appearance: none;
   color: #fff;
   background: #00f;
-  font-size: ${props => (props.small ? 20 : 24)}px;
+  font-size: 20px;
   /* font-weight: bold; */
   padding: ${props => (props.small ? "3px 12px" : "6px 20px")};
   border: 0 none;
