@@ -67,8 +67,7 @@ const About = () => {
   const container = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    // console.log(container.current.parentNode.getBoundingClientRect().height);
-    const width = 800;
+    const width = 1000;
     const height = Math.max(
       container.current.parentElement.getBoundingClientRect().height | 0,
       400
