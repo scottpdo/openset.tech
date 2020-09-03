@@ -28,7 +28,7 @@ const Who = () => {
         </Column>
       </Grid>
       <Grid>
-        <Column width={4} largeWidth={3} medWidth={4} xSmallWidth={12}>
+        <Column width={4} medWidth={5} xSmallWidth={12}>
           <noscript>
             <img
               src="/static/scott.png"
@@ -37,9 +37,9 @@ const Who = () => {
           </noscript>
           <canvas
             ref={ref}
-            height={400}
-            width={400}
-            style={{ maxWidth: "100%", height: "auto" }}
+            height={600}
+            width={600}
+            style={{ width: "100%", height: "auto" }}
           />
           <p>
             <b>Scott Donaldson</b>
@@ -49,7 +49,7 @@ const Who = () => {
             <a href="mailto:scott@openset.tech">scott@openset.tech</a>
           </p>
         </Column>
-        <Column width={8} largeWidth={9} medWidth={8} xSmallWidth={12}>
+        <Column width={8} medWidth={7} xSmallWidth={12}>
           <Bio>
             Scott founded Open Set in 2020 after serving as Director of
             Technology at iStrategyLabs (ISL) in Washington, DC. Scott has
