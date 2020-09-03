@@ -61,10 +61,12 @@ const fragShader = () => {
 
       float speed = 1.0;
 
-      float mightChange = pow(noise(vec2(
-        nx / (u_width / 6.0) + cos(u_time) * speed, 
-        ny / (u_height) + sin(u_time) * speed
-      )), 1.0);
+      float mightChange = sqrt(noise(vec2(
+        nx / (u_width / 12.0) + cos(u_time) * speed,
+        ny / (u_height * 2.0) + sin(u_time) * speed
+      )));
+
+      mightChange += 0.3 * (ny - 1.0) / u_height;
 
       float r = random2(st);
       float r2 = pow(r, 2.0);

@@ -52,15 +52,13 @@ const P1 = styled.div`
 `;
 
 const Container = styled.div`
-  height: 500px;
-
   canvas {
     position: absolute;
     top: 0;
     right: 40px;
 
     @media screen and (max-width: ${M}px) {
-      right: -24px;
+      position: relative;
     }
   }
 `;
@@ -69,7 +67,12 @@ const About = () => {
   const container = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    const [width, height] = [800, 500];
+    // console.log(container.current.parentNode.getBoundingClientRect().height);
+    const width = 800;
+    const height = Math.max(
+      container.current.parentElement.getBoundingClientRect().height | 0,
+      400
+    );
     let environment = new Environment({ width, height, torus: true });
     const renderer = new CanvasRenderer(environment, { width, height });
     renderer.mount(container.current);
@@ -199,9 +202,7 @@ const About = () => {
       </P1>
       <Grid>
         <Column width={6} smallWidth={12}>
-          <ColumnFiller style={{ alignItems: "flex-end" }}>
-            <Container ref={container} />
-          </ColumnFiller>
+          <Container ref={container} />
         </Column>
         <Column width={6} smallWidth={12}>
           <p>

@@ -97,7 +97,7 @@ const HeroLedeSmallScreen = styled(HeroLede)`
 const HeroButton = styled.div`
   animation: 1s ${fadeInLeft};
   animation-fill-mode: both;
-  animation-delay: 5.5s;
+  animation-delay: 2s;
   text-align: right;
   width: 100%;
   @media screen and (max-width: ${Breakpoints.M}px) {
@@ -265,7 +265,6 @@ const Hero = () => {
                   e.preventDefault();
                   scrollToTarget("#contact");
                 }}
-                small
               >
                 Say Hi
               </GLButton>

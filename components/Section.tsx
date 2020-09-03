@@ -10,6 +10,27 @@ const StyledSection = styled.section<{ blue: boolean; first: boolean }>`
   padding-top: ${props => (props.blue ? 120 : props.first ? 0 : 120)}px;
   padding-bottom: 120px;
 
+  &:before,
+  &:after {
+    content: "";
+    display: ${props => (props.blue ? "block" : "none")};
+    height: 100%;
+    width: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+
+    @media screen and (max-width: ${Breakpoints.S}px) {
+      display: none;
+    }
+  }
+
+  &:after {
+    left: unset;
+    right: 0;
+  }
+
   & > div {
     transition: 0.8s opacity, 0.8s transform;
   }
