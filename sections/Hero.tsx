@@ -191,38 +191,19 @@ const Hero = () => {
   };
 
   const populate = () => {
-    const bufferCanvas = createCanvas();
-
-    const style = getComputedStyle(ref.current);
-    const buffer = bufferCanvas.getContext("2d");
-    const fontSize = 131;
-    // hard-coded because getComputedStyle doesn't seem to work on iPad???
-    buffer.font = `bold ${fontSize}px Yrsa`;
-    buffer.fillStyle = "#00f";
-    buffer.textAlign = "center";
-    buffer.textBaseline = "hanging";
-    buffer.fillText("to explore, visualize, and analyze", width, 25);
-    buffer.fillText("complex systems", width, 210);
-
-    const dataURL = bufferCanvas.toDataURL();
     const canvas = createCanvas();
     ref.current.querySelector("b").appendChild(canvas);
-
-    canvas.addEventListener("click", () => {
-      canvas.width += 10;
-    });
 
     // @ts-ignore
     gl = new GlslCanvas(canvas);
     gl.load(fragShader);
     gl.setUniform("u_width", width * 2);
     gl.setUniform("u_height", 182 * 2);
-    gl.setUniform("u_texture", dataURL);
+    gl.setUniform("u_texture", "/static/hero-text.png");
   };
 
   useEffect(() => {
-    // @ts-ignore
-    document.fonts.ready.then(() => populate());
+    populate();
   }, []);
   return (
     <Header>
