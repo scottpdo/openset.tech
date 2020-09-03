@@ -220,29 +220,9 @@ const Hero = () => {
     gl.setUniform("u_texture", dataURL);
   };
 
-  const onResize = () => {
-    // const canvas = ref.current.querySelector("canvas");
-    // const { width, height } = canvas.parentElement.getBoundingClientRect();
-    // gl.setUniform("u_width", width);
-    // gl.setUniform("u_height", height);
-    // while (canvas.width > 2 * width) {
-    //   console.log(canvas.width);
-    //   canvas.width -= 1;
-    // }
-    // console.log(canvas.width, width);
-    // canvas.width = width;
-    // console.log(canvas.width);
-    // canvas.height = height;
-    // canvas.style.width = width + "px";
-    // canvas.style.height = height + "px";
-  };
-
   useEffect(() => {
-    populate();
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
+    // @ts-ignore
+    document.fonts.ready.then(() => populate());
   }, []);
   return (
     <Header>
