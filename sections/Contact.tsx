@@ -84,7 +84,7 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const form = useRef<HTMLFormElement>();
   const formURL =
-    "https://script.google.com/macros/s/AKfycbxcJUO7z9UW0MG30WtR2GvdGVeTIqNi7Mged52e-VTlNmf6luBx/exec";
+    "https://script.google.com/macros/s/AKfycbxaJXofM8cZoaCuJY3ltWPOSRyeQ4SNS1qTTaL-ICoYINFLEvJwD7W-bQ/exec";
   return (
     <div id="contact">
       <Section dir="right">
@@ -119,7 +119,7 @@ const Contact = () => {
                   });
                   fetch(formURL, {
                     method: "POST",
-                    body,
+                    body
                   });
                   setSubmitted(true);
                 }}
