@@ -1,3 +1,4 @@
+import React from "react";
 import { useRef, useEffect } from "react";
 import GlslCanvas from "../lib/GlslCanvas";
 import styled from "styled-components";
@@ -12,7 +13,7 @@ const Container = styled.canvas`
   transition: 0.5s transform, 0.5s opacity;
 `;
 
-const Button = styled.button<{ small: boolean }>`
+const Button = styled.button<{ small?: boolean }>`
   appearance: none;
   color: #fff;
   background: #00f;
@@ -81,18 +82,13 @@ const fragShader = `
 
 const GLButton = ({
   children,
-  small = false,
-  ...props
-}: {
-  children?: any;
-  small: boolean;
+  onClick,
+  small = false
+}: React.HTMLAttributes<HTMLButtonElement> & {
+  small?: boolean;
 }) => {
   if (typeof window === "undefined") {
-    return (
-      <Button small={small} {...props}>
-        {children}
-      </Button>
-    );
+    return <Button small={small}>{children}</Button>;
   }
 
   const ref = useRef<HTMLCanvasElement>();
@@ -123,7 +119,7 @@ const GLButton = ({
   }, []);
 
   return (
-    <Button small={small} {...props}>
+    <Button onClick={onClick} small={small}>
       <Container ref={ref} />
       <span style={{ pointerEvents: "none" }}>{children}</span>
     </Button>

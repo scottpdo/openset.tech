@@ -7,65 +7,10 @@ import { useRef, useEffect, useState } from "react";
 import GlslCanvas from "../lib/GlslCanvas";
 import { fadeIn, fadeInLeft } from "../styles/fade";
 import ColumnFiller from "../components/ColumnFiller";
-import scrollToTarget from "../utils/scrollToTarget";
-import GLButton from "../components/GLButton";
+import TopNav from "../components/TopNav";
+import Header from "../components/Header";
 
 const [width, height] = [864, 182];
-
-const Branding = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Header = styled.header`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-  padding-top: 60px;
-
-  @media screen and (max-width: ${Breakpoints.L}px) {
-    padding: 40px 0;
-  }
-
-  @media screen and (max-width: ${Breakpoints.M}px) {
-    height: 90vh;
-  }
-
-  h1,
-  h2 {
-    margin: 0;
-    font-weight: 400;
-  }
-
-  h1 {
-    font-size: 36px;
-    margin-bottom: -4px;
-  }
-
-  h2 {
-    font-size: 18px;
-  }
-`;
-
-const HeaderLogo = styled.img`
-  animation: 1s ${fadeInLeft};
-  animation-fill-mode: both;
-  margin-right: 20px;
-  width: 52px;
-`;
-
-const HeaderH1 = styled.h1`
-  animation: 1s ${fadeInLeft};
-  animation-fill-mode: both;
-  animation-delay: 0.5s;
-`;
-
-const HeaderH2 = styled.h2`
-  animation: 1s ${fadeInLeft};
-  animation-delay: 1s;
-  animation-fill-mode: both;
-`;
 
 const HeroLede = styled(Lede)`
   font-size: 5vw !important;
@@ -91,17 +36,6 @@ const HeroLedeSmallScreen = styled(HeroLede)`
   font-size: 40px !important;
   @media screen and (max-width: ${Breakpoints.M}px) {
     display: block;
-  }
-`;
-
-const HeroButton = styled.div`
-  animation: 1s ${fadeInLeft};
-  animation-fill-mode: both;
-  animation-delay: 2s;
-  text-align: right;
-  width: 100%;
-  @media screen and (max-width: ${Breakpoints.M}px) {
-    display: none;
   }
 `;
 
@@ -207,32 +141,7 @@ const Hero = () => {
   }, []);
   return (
     <Header>
-      <Grid>
-        <Column width={9} smallWidth={12}>
-          <Branding>
-            <HeaderLogo src="/static/logo.png" alt="" />
-            <div>
-              <HeaderH1>Open Set</HeaderH1>
-              <HeaderH2>Software Design + Research</HeaderH2>
-            </div>
-          </Branding>
-        </Column>
-        <Column width={3}>
-          <ColumnFiller>
-            <HeroButton>
-              <GLButton
-                // @ts-ignore
-                onClick={e => {
-                  e.preventDefault();
-                  scrollToTarget("#contact");
-                }}
-              >
-                Say Hi
-              </GLButton>
-            </HeroButton>
-          </ColumnFiller>
-        </Column>
-      </Grid>
+      <TopNav />
       <Grid style={{ flexGrow: 2 }}>
         <Column width={12}>
           <ColumnFiller>
