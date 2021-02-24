@@ -9,7 +9,11 @@ const StyledWrapper = styled.div``;
 
 const Content = styled.div``;
 
-const Wrapper = ({ children, title = "" }) => {
+const Wrapper = ({
+  children,
+  title = "",
+  description = "Open Set designs and builds software to explore, visualize, and analyze complex systems."
+}) => {
   useEffect(() => {
     window.dataLayer = window.dataLayer || [];
     function gtag() {
@@ -25,7 +29,10 @@ const Wrapper = ({ children, title = "" }) => {
     <StyledWrapper>
       <Head>
         <title>{title ? title + " | " : ""}Open Set</title>
-        <meta name="og:title" content="Open Set" />
+        <meta
+          name="og:title"
+          content={`${title ? title + " | " : ""}Open Set`}
+        />
         <link
           rel="shortcut icon"
           href={
@@ -45,14 +52,8 @@ const Wrapper = ({ children, title = "" }) => {
           name="viewport"
           content="width=device-width, initial-scale=1"
         ></meta>
-        <meta
-          name="description"
-          content="Open Set designs and builds software to explore, visualize, and analyze complex systems."
-        />
-        <meta
-          name="og:description"
-          content="Open Set designs and builds software to explore, visualize, and analyze complex systems."
-        />
+        <meta name="description" content={description} />
+        <meta name="og:description" content={description} />
         <meta
           name="og:image"
           content={
