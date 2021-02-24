@@ -20,8 +20,8 @@ const Careers = () => {
         <Section>
           <Grid>
             <Column width={4} medWidth={12}>
-              <SectionTitle id="front-end-developer">
-                Front-end Developer
+              <SectionTitle id="contract-front-end-developer">
+                Contract Front-end Developer
               </SectionTitle>
             </Column>
             <Column width={8} medWidth={12}>
