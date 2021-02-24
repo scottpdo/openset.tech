@@ -161,8 +161,8 @@ const Careers = () => {
         </Section>
         <Section blue>
           <Grid>
-            <Column width={2}></Column>
-            <Column width={8}>
+            <Column width={2} medWidth={12}></Column>
+            <Column width={8} medWidth={12}>
               <p style={{ textAlign: "center" }}>
                 Open Set is committed to equal opportunity employment and
                 creating a working environment free from discrimination and
