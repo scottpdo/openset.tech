@@ -2,7 +2,6 @@
 
 import Wrapper from "../components/Wrapper";
 import Contact from "../sections/Contact";
-import Header from "../components/Header";
 import TopNav from "../components/TopNav";
 import Section from "../components/Section";
 import SectionTitle from "../components/SectionTitle";
@@ -13,7 +12,7 @@ import Footer from "../sections/Footer";
 
 const Careers = () => {
   return (
-    <Wrapper>
+    <Wrapper title="Careers">
       <div>
         <TopNav />
         <PageTitle>Careers</PageTitle>
