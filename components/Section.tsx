@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import * as Breakpoints from "../styles/breakpoints";
 import { useState, useEffect, useRef } from "react";
 import inViewport from "../utils/inViewport";
@@ -66,7 +66,11 @@ const StyledSection = styled.section<{ blue: boolean; first: boolean }>`
   }
 
   & + section {
-    ${props => !props.blue && "margin-top: 0;"}
+    ${props =>
+      !props.blue &&
+      css`
+        margin-top: 0;
+      `}
   }
 
   ${SectionTitle} {
@@ -78,7 +82,7 @@ const Section = ({
   blue = false,
   dir = "left",
   children,
-  first = false,
+  first = false
 }: {
   blue?: boolean;
   dir?: "right" | "left";
@@ -101,7 +105,7 @@ const Section = ({
       <div
         style={{
           opacity: loaded ? 1 : 0,
-          transform: `translateX(${loaded ? 0 : dir === "left" ? 40 : -40}px)`,
+          transform: `translateX(${loaded ? 0 : dir === "left" ? 40 : -40}px)`
         }}
       >
         {children}

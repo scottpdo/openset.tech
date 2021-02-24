@@ -47,17 +47,9 @@ const onMount = (
   let terrain = new Terrain(width, height, { scale });
   environment.use(terrain);
 
-  const rect = container.current.getBoundingClientRect();
-
   terrain.addRule((x, y) => {
     if (!window.__GLOBAL_CURSOR)
       window.__GLOBAL_CURSOR = { x: -9999, y: -9999 };
-    const cursor: { x: number; y: number } = window.__GLOBAL_CURSOR;
-    // const d = utils.distance(cursor, {
-    //   x: x * scale - rect.x,
-    //   y: y * scale - rect.y,
-    // });
-    // if (utils.uniform() > d / 150) return Colors.GREEN;
     if (
       environment.time === 0 ||
       (direction === "left" && x === width - 1) ||
@@ -116,16 +108,19 @@ const onMount = (
 const CA = ({
   direction,
   height = 3,
+  ...props
 }: {
   direction: "left" | "right" | "up" | "down";
   height?: number;
-}) => {
+} & React.HTMLAttributes<HTMLDivElement>) => {
   const container = useRef();
 
-  useEffect(() => onMount(container, direction, height), []);
+  useEffect(() => {
+    return onMount(container, direction, height);
+  }, []);
 
   return (
-    <Grid nested={direction === "up" || direction === "down"}>
+    <Grid nested={direction === "up" || direction === "down"} {...props}>
       {direction === "left" && <Column width={4} />}
       <Column
         width={direction === "up" || direction === "down" ? 12 : 8}

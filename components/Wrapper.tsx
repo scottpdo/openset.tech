@@ -9,7 +9,7 @@ const StyledWrapper = styled.div``;
 
 const Content = styled.div``;
 
-const Wrapper = ({ children }) => {
+const Wrapper = ({ children, title = "" }) => {
   useEffect(() => {
     window.dataLayer = window.dataLayer || [];
     function gtag() {
@@ -24,7 +24,7 @@ const Wrapper = ({ children }) => {
   return (
     <StyledWrapper>
       <Head>
-        <title>Open Set</title>
+        <title>{title ? title + " | " : ""}Open Set</title>
         <meta name="og:title" content="Open Set" />
         <link
           rel="shortcut icon"
