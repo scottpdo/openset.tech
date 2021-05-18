@@ -71,8 +71,10 @@ const TopNav = () => {
           <HeroButton>
             <GLButton
               onClick={e => {
-                e.preventDefault();
-                scrollToTarget("#contact");
+                const a = document.createElement("a");
+                a.href = "mailto:hello@openset.tech";
+                a.target= "_blank";
+                a.click();
               }}
             >
               Say Hi
