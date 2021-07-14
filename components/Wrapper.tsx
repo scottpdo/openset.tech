@@ -14,16 +14,6 @@ const Wrapper = ({
   title = "",
   description = "Open Set designs and builds software to explore, visualize, and analyze complex systems."
 }) => {
-  useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      window.dataLayer.push(arguments);
-    }
-    // @ts-ignore
-    gtag("js", new Date());
-    // @ts-ignore
-    gtag("config", "UA-176828735-1");
-  }, []);
 
   return (
     <StyledWrapper>
@@ -44,10 +34,6 @@ const Wrapper = ({
           href="https://fonts.googleapis.com/css2?family=Yrsa:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=UA-176828735-1"
-        ></script>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1"
