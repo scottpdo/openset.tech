@@ -145,12 +145,12 @@ const Work = () => {
               City of San José
             </a>
             ,{" "}
-            <a href="https://www.accion.org" target="_blank">
-              Accion International
+            <a href="https://www.xplortechnologies.com/us" target="_blank">
+              Xplor Technologies
             </a>
             ,{" "}
-            <a href="https://www.booksatwork.org" target="_blank">
-              Books@Work
+            <a href="https://www.accion.org" target="_blank">
+              Accion International
             </a>
             , and other organizations.
           </p>
